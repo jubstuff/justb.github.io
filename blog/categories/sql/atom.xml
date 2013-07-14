@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: SQL | My Octopress Blog]]></title>
+  <link href="http://JustB.github.io/blog/categories/sql/atom.xml" rel="self"/>
+  <link href="http://JustB.github.io/"/>
+  <updated>2013-07-15T01:47:35+02:00</updated>
+  <id>http://JustB.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Multiple Sums with different conditions in MySQL]]></title>
+    <link href="http://JustB.github.io/multiple-sums-with-different-conditions-in-mysql/"/>
+    <updated>2012-12-17T02:42:21+01:00</updated>
+    <id>http://JustB.github.io/multiple-sums-with-different-conditions-in-mysql</id>
+    <content type="html"><![CDATA[<p>Today I was working on my last project that involves some statistics on data. I had a table like this:</p>
+
+<p><img class="center" src="/images/tabella-1.png""></p>
+
+<p>I needed the daily, monthly and yearly sum of the <code>value</code> field. How to do this?</p>
+
+<!-- more -->
+
+
+<p>The simplest approach was to have three different queries to retrieve the needed values:</p>
+
+<p><code>sql
+--day
+SELECT SUM(value)
+FROM table
+WHERE DATE(time)=CURDATE();
+-- month
+SELECT SUM(value)
+FROM table
+WHERE MONTH(time)=MONTH(CURDATE()) AND YEAR(time)=YEAR(CURDATE());
+-- year
+SELECT SUM(value)
+FROM table
+WHERE YEAR(time)=YEAR(CURDATE());
+</code></p>
+
+<p>But I wasn&rsquo;t satisfied. I wanted to have all three values using only one query. So I searched for this issue and this is the resulting query:</p>
+
+<p>``` sql
+SELECT
+  SUM(CASE WHEN DATE(time)=CURDATE()</p>
+
+<pre><code>THEN value 
+ELSE 0 end) AS value_day,
+</code></pre>
+
+<p>  SUM(CASE WHEN MONTH(time)=MONTH(CURDATE()) AND YEAR(time)=YEAR(CURDATE())</p>
+
+<pre><code>THEN value 
+ELSE 0 end) AS value_month,
+</code></pre>
+
+<p>  SUM(CASE WHEN YEAR(time)=YEAR(CURDATE())</p>
+
+<pre><code>THEN value 
+ELSE 0 end) AS value_year
+</code></pre>
+
+<p>FROM table
+```</p>
+
+<p>Using the CASE construct, we increment independently the three values so that each row that satisfies the condition gets summed up.</p>
+]]></content>
+  </entry>
+  
+</feed>

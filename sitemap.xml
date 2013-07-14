@@ -1,12 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://JustB.github.io/multiple-sums-with-different-conditions-in-mysql/</loc>
+        <lastmod>2013-07-15T01:43:39+02:00</lastmod>
+    </url>
+    <url>
         <loc>http://JustB.github.io/blog/archives/</loc>
-        <lastmod>2013-07-15T01:09:58+02:00</lastmod>
+        <lastmod>2013-07-15T01:43:39+02:00</lastmod>
     </url>
     <url>
         <loc>http://JustB.github.io/</loc>
-        <lastmod>2013-07-15T01:09:58+02:00</lastmod>
+        <lastmod>2013-07-15T01:43:39+02:00</lastmod>
     </url>
     <url>
         <loc>http://JustB.github.io/robots.txt</loc>
