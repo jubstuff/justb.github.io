@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Quotes | My Octopress Blog]]></title>
+  <title><![CDATA[Category: Quotes | Jub's Stuff]]></title>
   <link href="http://JustB.github.io/blog/categories/quotes/atom.xml" rel="self"/>
   <link href="http://JustB.github.io/"/>
-  <updated>2013-07-15T01:58:17+02:00</updated>
+  <updated>2013-07-15T16:14:17+02:00</updated>
   <id>http://JustB.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Giustino Borzacchiello]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
