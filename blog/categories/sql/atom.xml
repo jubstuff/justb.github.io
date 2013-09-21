@@ -4,7 +4,7 @@
   <title><![CDATA[Category: SQL | Jub's Stuff]]></title>
   <link href="http://JustB.github.io/blog/categories/sql/atom.xml" rel="self"/>
   <link href="http://JustB.github.io/"/>
-  <updated>2013-09-21T11:49:08+02:00</updated>
+  <updated>2013-09-21T14:20:13+02:00</updated>
   <id>http://JustB.github.io/</id>
   <author>
     <name><![CDATA[Giustino Borzacchiello]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Multiple Sums with different conditions in MySQL]]></title>
     <link href="http://JustB.github.io/multiple-sums-with-different-conditions-in-mysql/"/>
-    <updated>2012-12-17T02:42:21+01:00</updated>
+    <updated>2013-09-21T15:48:38+02:00</updated>
     <id>http://JustB.github.io/multiple-sums-with-different-conditions-in-mysql</id>
     <content type="html"><![CDATA[<p>Today I was working on my last project that involves some statistics on data. I had a table like this:</p>
 

@@ -4,19 +4,18 @@
   <title><![CDATA[Jub's Stuff]]></title>
   <link href="http://JustB.github.io/atom.xml" rel="self"/>
   <link href="http://JustB.github.io/"/>
-  <updated>2013-09-21T11:49:08+02:00</updated>
+  <updated>2013-09-21T14:20:13+02:00</updated>
   <id>http://JustB.github.io/</id>
   <author>
     <name><![CDATA[Giustino Borzacchiello]]></name>
     
   </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
     <title type="html"><![CDATA[Multiple Sums with different conditions in MySQL]]></title>
     <link href="http://JustB.github.io/multiple-sums-with-different-conditions-in-mysql/"/>
-    <updated>2012-12-17T02:42:21+01:00</updated>
+    <updated>2013-09-21T15:48:38+02:00</updated>
     <id>http://JustB.github.io/multiple-sums-with-different-conditions-in-mysql</id>
     <content type="html"><![CDATA[<p>Today I was working on my last project that involves some statistics on data. I had a table like this:</p>
 
@@ -104,9 +103,7 @@
     <link href="http://JustB.github.io/on-software-inventory/"/>
     <updated>2012-07-12T00:00:00+02:00</updated>
     <id>http://JustB.github.io/on-software-inventory</id>
-    <content type="html"><![CDATA[<p><img src="http://giustino.borzacchiello.it/wp-content/uploads/2012/07/bread-150x150.jpg" alt="a loaf of bread" title="bread" width="150" height="150" class="alignleft size-thumbnail wp-image-714" /></p>
-
-<p>Few days ago Joel Spolsky published a post on his blog from the title: <a href="http://www.joelonsoftware.com/items/2012/07/09.html">&ldquo;Software Inventory&rdquo;</a>.
+    <content type="html"><![CDATA[<p>Few days ago Joel Spolsky published a post on his blog from the title: <a href="http://www.joelonsoftware.com/items/2012/07/09.html">&ldquo;Software Inventory&rdquo;</a>.
 In this post, he associates &ldquo;inventory costs&rdquo; to software, just like a traditional factory. Spolsky highlights these points where inventory piles up:</p>
 
 <ul>
