@@ -1,50 +1,78 @@
 
-<!DOCTYPE HTML>
-<html lang="it">
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
-	<meta charset="utf-8">
-	<title>Bob Martin’s Three Laws of TDD  | Jub's Stuff</title>
+  <meta charset="utf-8">
+  <title>Bob Martin’s Three Laws of TDD - Jub's Stuff</title>
+  <meta name="author" content="Giustino Borzacchiello">
 
-	<meta name="author" content="Giustino Borzacchiello">
+  
+  <meta name="description" content="1. Do not write production code unless it is to make a failing unit test pass. 2. Do not write more of a unit test than is sufficient to fail, and &hellip;">
+  
 
-    <meta name="description" content="In this site I share my opinions and findings on Programming"> <meta name="keywords" content="">
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <link rel="canonical" href="http://JustB.github.io/bob-martin-three-laws-TDD">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jub's Stuff" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
-	<link href="/atom.xml" rel="alternate" title="Jub's Stuff" type="application/atom+xml">
-	<link rel="canonical" href="">
-	<link href="/favicon.png" rel="shortcut icon">
-	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> -->
-	
+  
+
 </head>
 
-
-
-<body>
-	<header id="header" class="inner"><h1><a href="/">Jub's Stuff</a></h1>
-<span class="tagline">Just on Programming and Stuff</span>
-<nav id="main-nav"><ul>
-	<li><a href="/archives">Archives</a></li>
-</ul>
-</nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><ul>
-	<li><a href="/archives">Archives</a></li>
-</ul>
-</div>
-	</div>
-</nav>
-
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jub's Stuff</a></h1>
+  
+    <h2>Just on Programming and Stuff</h2>
+  
+</hgroup>
 
 </header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:JustB.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
 
-	<div id="content" class="inner"><article class="post">
-	<header>
-		<div class="meta date">
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Bob Martin’s Three Laws of TDD</h1>
+    
+    
+      <p class="meta">
+        
 
 
 
@@ -56,54 +84,105 @@
   
 
 
-<time datetime="2012-09-15T11:00:21+02:00" pubdate data-updated="true">Sep 15<span>th</span>, 2012</time></div>
-		<h2 class="title">Bob Martin’s Three Laws of TDD</h2>
-	</header>
-	<div class="entry-content"><blockquote><p>1. Do not write production code unless it is to make a failing unit test pass.<br/> 2. Do not write more of a unit test than is sufficient to fail, and build failures are failures.<br/> 3. Do not write more production code than is sufficient to pass the one failing unit test.</p><p>Even though this sounds restrictive, it is a very productive and fun way to develop software.</p><footer><strong>Bob Martin</strong> <cite><a href='http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd'>butunclebob.com/&hellip;</a></cite></footer></blockquote>
+<time datetime="2012-09-15T11:00:21+02:00" pubdate data-updated="true">Sep 15<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><blockquote><p>1. Do not write production code unless it is to make a failing unit test pass.<br/> 2. Do not write more of a unit test than is sufficient to fail, and build failures are failures.<br/> 3. Do not write more production code than is sufficient to pass the one failing unit test.</p><p>Even though this sounds restrictive, it is a very productive and fun way to develop software.</p><footer><strong>Bob Martin</strong> <cite><a href='http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd'>butunclebob.com/&hellip;</a></cite></footer></blockquote>
 
 
 
 </div>
-	
 
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Giustino Borzacchiello</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-15T11:00:21+02:00" pubdate data-updated="true">Sep 15<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/quotes/'>Quotes</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://JustB.github.io/bob-martin-three-laws-TDD/" data-via="jubstuff" data-counturl="http://JustB.github.io/bob-martin-three-laws-TDD/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/on-software-inventory/" title="Previous Post: On Software Inventory">&laquo; On Software Inventory</a>
+      
+      
+        <a class="basic-alignment right" href="/multiple-sums-with-different-conditions-in-mysql/" title="Next Post: Multiple Sums with different conditions in MySQL">Multiple Sums with different conditions in MySQL &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
 
-	
-	<div class="share">
-		<ul>
-			<li>
-  <a href="https://twitter.com/intent/tweet?text=Bob Martin’s Three Laws of TDD by @jubstuff&url=http://JustB.github.io/bob-martin-three-laws-TDD/" title="Share Bob Martin’s Three Laws of TDD on Twitter">
-    <img src="/images/social/twitter.png" />
-  </a>
-</li>
-
-			<li>
-  <a href="https://www.facebook.com/sharer.php?u=http://JustB.github.io/bob-martin-three-laws-TDD/" title="Share Bob Martin’s Three Laws of TDD on Facebook">
-    <img src="/images/social/facebook.png" />
-  </a>
-</li>
-
-			<li>
-  <a href="https://plus.google.com/share?url=http://JustB.github.io/bob-martin-three-laws-TDD/" title="Share Bob Martin’s Three Laws of TDD on Google Plus">
-    <img src="/images/social/google.png" />
-  </a>
-</li>
-
-		</ul>
-	</div>
-
-
-
 </div>
-	<footer id="footer" class="inner">&copy; 2013
 
-    Giustino Borzacchiello
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Giustino Borzacchiello -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
 
 </footer>
-	<script src="/javascripts/slash.js"></script>
-<script src="/javascripts/hyphenator.js"></script>
+  
 
 
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
 
 
 
