@@ -9,10 +9,7 @@
   <meta name="author" content="Giustino Borzacchiello">
 
   
-  <meta name="description" content="So what I learned today? Replace method in Python In Python you can use the replace method on strings to replace a part of it with another 1
-2
-3
-In [ &hellip;">
+  <meta name="description" content="Today I started to solve the Project Euler problems. I don&rsquo;t know how much time I can spend solving these problems, but I hope to complete the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,7 +71,267 @@ In [ &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/what-i-learned-today-11-slash-10-slash-2013-edition/">What I Learned Today - 11/10/2013 Edition</a></h1>
+      <h1 class="entry-title"><a href="/project-euler-problem-1/">Project Euler - Problem 1</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-13T21:03:00+02:00" pubdate data-updated="true">Oct 13<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Today I started to solve the Project Euler problems. I don&rsquo;t know how much time I can spend solving these problems, but I hope to complete the <em>quest</em> in the span of a lifetime :).</p>
+
+<p>So here is the first problem:</p>
+
+<blockquote><p>If we list all the natural numbers below 10 that are multiples of 3 and 5, we get 3, 5, 6, 9. The sum of these multiples is 23.</p><p>Find the sum of all the multiples of 3 and 5 below 1000.</p><footer><strong>Problem 1 - Project Euler</strong></footer></blockquote>
+
+
+<p>The first try I could think of, was the obvious brute force approach. Cycle through all the numbers, and sum them up if they are multiples of 3 or 5:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sum = 0
+</span><span class='line'>for n in 1..1000
+</span><span class='line'>    if n % 3 == 0 || n % 5 == 0 then
+</span><span class='line'>        sum += n</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This worked but I wasn&rsquo;t too satisfied: it was way too simple. So I started to think of a possible alternate solution.</p>
+
+<p>I thought to loop through the multiples of 3 and 5 at the same time, having two variables to hold the partial result. Something like:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>n3 = n5 = 0
+</span><span class='line'>sum = 0
+</span><span class='line'>while n3 &lt; 1000
+</span><span class='line'>    n3 += 3
+</span><span class='line'>    n5 += 5
+</span><span class='line'>    sum += n3 + n5</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Well, in my defense, it seemed like a good idea&hellip;but it misses completely the solution. Time to move on.</p>
+
+<p>What would you do when you have to think about a problem? The answer is obvious: take a shower. And it worked!</p>
+
+<h2>The shower solution</h2>
+
+<p>So what does the shower told me? Let&rsquo;s assume that we have to find the sum of all the multiples of 3 and 5 below 20, to keep the math simple.</p>
+
+<p>These multiples are:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>3+5+6+9+10+12+15+18</span></code></pre></td></tr></table></div></figure>
+
+
+<p>that sum up to 78. Let&rsquo;s split them up in multiples of 3 and multiples of 5:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Multiples of 3: 
+</span><span class='line'>3+6+9+12+15+18 = 63
+</span><span class='line'>
+</span><span class='line'>Multiples of 5: 
+</span><span class='line'>5+10+15 = 30</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But we could look at those like:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>3 * (1+2+3+4+5+6) = 63
+</span><span class='line'>
+</span><span class='line'>5 * (1+2+3) = 30</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Start to see the pattern? If we could just find the sum of the first <code>N</code> natural numbers, we could find the sum just with simple multiplications. But we can! Here&rsquo;s how:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Sum of the first N numbers
+</span><span class='line'>
+</span><span class='line'>N*(N+1)/2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So we could write:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>3 * 6 * 7 / 2 = 63
+</span><span class='line'>
+</span><span class='line'>5 * 3 * 4 / 2 = 30</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Problems, always problems</h2>
+
+<p>I hear you: <em>&ldquo;But 63+30 isn&rsquo;t 78!&rdquo;</em>. Right, where is the problem? The problem is that we are including the number <code>15</code> twice. We have to subtract this number from the total to have the correct solution:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>3 * 6 * 7 / 2  = 63
+</span><span class='line'>                 +
+</span><span class='line'>5 * 3 * 4 / 2  = 30
+</span><span class='line'>                 -
+</span><span class='line'>15 * 1 * 2 / 2 = 15
+</span><span class='line'>               ------
+</span><span class='line'>                 78</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Why is this? Because 15 = 5 * 3, so we have to consider this number and all its multiples only once (as it should count as a multiple of 3 <strong>or</strong> a multiple of 5).</p>
+
+<p>Now we are very close to the alternate solution: there is just one more thing to consider: how do we get <code>N</code> to calculate the first <code>N</code> numbers? In our example we found the sum for the first 6 numbers for 3, the first 3 ones for 5 and 1 for 15. How did we find these values?</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>3 * (1+2+3+4+5+6) = 63 
+</span><span class='line'>                    +   
+</span><span class='line'>5 * (1+2+3)       = 30  
+</span><span class='line'>                    -   
+</span><span class='line'>15 * 1            = 15  
+</span><span class='line'>                  ------
+</span><span class='line'>                    78  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>It&rsquo;s very simple: we just have to divide the max value for the number and take the integer part of the result.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>20 / 3 = 6
+</span><span class='line'>
+</span><span class='line'>20 / 5 = 4
+</span><span class='line'>
+</span><span class='line'>20 / 15 = 1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the case of 5, we have to decrement by 1, because the max value is out of the range, that&rsquo;s why we got 3 instead of 4.</p>
+
+<h2>Alternate solution</h2>
+
+<p>So here is the alternate solution:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>n3 = 1000 / 3
+</span><span class='line'>n5 = (1000 / 5) - 1
+</span><span class='line'>n15 = (1000 / 15) 
+</span><span class='line'>
+</span><span class='line'>sum3 = 3 * n3 * (n3 + 1) / 2
+</span><span class='line'>sum5 = 5 * n5 * (n5 + 1) / 2
+</span><span class='line'>sum15 = 15 * n15 * (n15 + 1) / 2
+</span><span class='line'>
+</span><span class='line'>sum = sum3 + sum5 - sum15
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/what-i-learned-13-10-2013/">What I Learned - 13/10/2013</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-13T12:18:57+02:00" pubdate data-updated="true">Oct 13<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Create a zip on the command line (simple edition)</h2>
+
+<p>How to create a zip file in Linux? All the latest version of Ubuntu have an <em>Compress</em> entry in the contextual menu. But today I wanted to learn how to do it on the command line.</p>
+
+<p>It turned out to be pretty simple:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>zip zipfile_name files_to_zip</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/what-i-learned-today-11-slash-10-slash-2013-edition/">What I Learned - 12/10/2013</a></h1>
     
     
       <p class="meta">
@@ -148,7 +405,7 @@ In [ &hellip;">
   
 
 
-<time datetime="2013-09-21T15:48:38+02:00" pubdate data-updated="true">Sep 21<span>st</span>, 2013</time>
+<time datetime="2012-12-17T21:52:52+01:00" pubdate data-updated="true">Dec 17<span>th</span>, 2012</time>
         
       </p>
     
@@ -232,7 +489,7 @@ In [ &hellip;">
   
 
 
-<time datetime="2012-07-12T00:00:00+02:00" pubdate data-updated="true">Jul 12<span>th</span>, 2012</time>
+<time datetime="2012-07-12T12:18:57+02:00" pubdate data-updated="true">Jul 12<span>th</span>, 2012</time>
         
       </p>
     
@@ -244,21 +501,19 @@ In this post, he associates &ldquo;inventory costs&rdquo; to software, just like
 
 <ul>
 <li>Feature backlogs</li>
-<li>Bug backlosh</li>
+<li>Bug backlogs</li>
 <li>Undeployed features</li>
 </ul>
 
 
 <p>After reading his analysis, I thought that the very difference between baking bread and developing software is the <strong>absence of phisicity</strong>.
-Having thousands of ounces of flour is very different from having a thousands lines of code more in a file.
+Having thousands of ounces of flour is very different from having a thousands more lines of code in a file.
 Even if they could have the same cost of management.</p>
 
 <p>What can be the solution, then? We need to make the invisible, visible, and material what is immaterial.
-All the things that slow down the development process <strong>must hurt</strong></p>
+All the things that slow down the development process <strong>must hurt</strong> and be always visible, just like the flour should be stocked in the factory offices.</p>
 
-<p>Quale può essere la soluzione dunque? Bisogna rendere visibile l&#8217;invisibile, e materiale ciò che è immateriale. Tutto quello che danneggia e rallenta il processo di sviluppo deve <em>far male</em> ed essere sempre e costantemente sotto gli occhi, così come la farina in esubero andrebbe stoccata negli uffici dei dipendenti.</p>
-
-<p>Mi piace quindi l&#8217;idea alla base di <a href="https://trello.com/">Trello</a>, il project manager sviluppato dalla sua <a href="http://www.fogcreek.com/">Fog Creek</a>:</p>
+<p>So, I like the idea that moves <a href="https://trello.com/">Trello</a>, the project manager developed by <a href="http://www.fogcreek.com">Fog Creek</a></p>
 
 <blockquote>
   Trello works great for a reasonable amount of inventory, but it <strong>intentionally</strong>
@@ -266,10 +521,9 @@ starts to get klunky if you have too many cards in one list.
 </blockquote>
 
 
-<p>Come su una scrivania affollata, Trello diventa difficoltoso da gestire se ci
-sono troppe cose da fare.</p>
+<p>Just like a crowded deskm, Trello is difficult to manage if there are too many cards.</p>
 
-<p>In fin dei conti se ci sono dei vantaggi nell&#8217;immaterialità dell&#8217;industria del software, bisogna anche tenere conto dei costi nascosti che molto spesso vengono ignorati.</p>
+<p>In the end, there are advantegs in the absence of phisicity, but we must consider the hidden costs that very often are ignored.</p>
 </div>
   
   

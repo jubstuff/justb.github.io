@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: wil | Jub's Stuff]]></title>
+  <link href="http://JustB.github.io/blog/categories/wil/atom.xml" rel="self"/>
+  <link href="http://JustB.github.io/"/>
+  <updated>2013-10-13T21:44:51+02:00</updated>
+  <id>http://JustB.github.io/</id>
+  <author>
+    <name><![CDATA[Giustino Borzacchiello]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[What I learned - 13/10/2013]]></title>
+    <link href="http://JustB.github.io/what-i-learned-13-10-2013/"/>
+    <updated>2013-10-13T12:18:57+02:00</updated>
+    <id>http://JustB.github.io/what-i-learned-13-10-2013</id>
+    <content type="html"><![CDATA[<h2>Create a zip on the command line (simple edition)</h2>
+
+<p>How to create a zip file in Linux? All the latest version of Ubuntu have an <em>Compress</em> entry in the contextual menu. But today I wanted to learn how to do it on the command line.</p>
+
+<p>It turned out to be pretty simple:</p>
+
+<p><code>
+zip zipfile_name files_to_zip
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What I learned - 12/10/2013]]></title>
+    <link href="http://JustB.github.io/what-i-learned-today-11-slash-10-slash-2013-edition/"/>
+    <updated>2013-10-12T17:50:03+02:00</updated>
+    <id>http://JustB.github.io/what-i-learned-today-11-slash-10-slash-2013-edition</id>
+    <content type="html"><![CDATA[<h2>So what I learned today?</h2>
+
+<h3>Replace method in Python</h3>
+
+<p>In Python you can use the <code>replace</code> method on strings to replace a part of it with another</p>
+
+<p><code>
+In [3]: key = '/blobstore/quhab72=qaqerqfxbhr'
+In [4]: key.replace('/blobstore/', '')
+Out[4]: 'quhab72=qaqerqfxbhr'
+</code></p>
+
+<h3>Logging in AppEngine</h3>
+
+<p>To have your debug logs appear in the console when you are running an AppEngine app in your development environment, just start the server with:</p>
+
+<p><code>
+$ dev_appserver.py --log_level=debug .
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>
