@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Project Euler - Problem 1 - Jub's Stuff</title>
+  <meta name="author" content="Giustino Borzacchiello">
+
+  
+  <meta name="description" content="Today I started to solve the Project Euler problems. I don&rsquo;t know how much time I can spend solving these problems, but I hope to complete the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://JustB.github.io/project-euler-problem-1">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jub's Stuff" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jub's Stuff</a></h1>
+  
+    <h2>Just on Programming and Stuff</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:JustB.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Project Euler - Problem 1</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-13T21:03:00+02:00" pubdate data-updated="true">Oct 13<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Today I started to solve the Project Euler problems. I don&rsquo;t know how much time I can spend solving these problems, but I hope to complete the <em>quest</em> in the span of a lifetime :).</p>
+
+<p>So here is the first problem:</p>
+
+<blockquote><p>If we list all the natural numbers below 10 that are multiples of 3 and 5, we get 3, 5, 6, 9. The sum of these multiples is 23.</p><p>Find the sum of all the multiples of 3 and 5 below 1000.</p><footer><strong>Problem 1 - Project Euler</strong></footer></blockquote>
+
+
+<p>The first try I could think of, was the obvious brute force approach. Cycle through all the numbers, and sum them up if they are multiples of 3 or 5:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sum = 0
+</span><span class='line'>for n in 1..1000
+</span><span class='line'>    if n % 3 == 0 || n % 5 == 0 then
+</span><span class='line'>        sum += n</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This worked but I wasn&rsquo;t too satisfied: it was way too simple. So I started to think of a possible alternate solution.</p>
+
+<p>I thought to loop through the multiples of 3 and 5 at the same time, having two variables to hold the partial result. Something like:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>n3 = n5 = 0
+</span><span class='line'>sum = 0
+</span><span class='line'>while n3 &lt; 1000
+</span><span class='line'>    n3 += 3
+</span><span class='line'>    n5 += 5
+</span><span class='line'>    sum += n3 + n5</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Well, in my defense, it seemed like a good idea&hellip;but it misses completely the solution. Time to move on.</p>
+
+<p>What would you do when you have to think about a problem? The answer is obvious: take a shower. And it worked!</p>
+
+<h2>The shower solution</h2>
+
+<p>So what does the shower told me? Let&rsquo;s assume that we have to find the sum of all the multiples of 3 and 5 below 20, to keep the math simple.</p>
+
+<p>These multiples are:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>3+5+6+9+10+12+15+18</span></code></pre></td></tr></table></div></figure>
+
+
+<p>that sum up to 78. Let&rsquo;s split them up in multiples of 3 and multiples of 5:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Multiples of 3: 
+</span><span class='line'>3+6+9+12+15+18 = 63
+</span><span class='line'>
+</span><span class='line'>Multiples of 5: 
+</span><span class='line'>5+10+15 = 30</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But we could look at those like:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>3 * (1+2+3+4+5+6) = 63
+</span><span class='line'>
+</span><span class='line'>5 * (1+2+3) = 30</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Start to see the pattern? If we could just find the sum of the first <code>N</code> natural numbers, we could find the sum just with simple multiplications. But we can! Here&rsquo;s how:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Sum of the first N numbers
+</span><span class='line'>
+</span><span class='line'>N*(N+1)/2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So we could write:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>3 * 6 * 7 / 2 = 63
+</span><span class='line'>
+</span><span class='line'>5 * 3 * 4 / 2 = 30</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Problems, always problems</h2>
+
+<p>I hear you: <em>&ldquo;But 63+30 isn&rsquo;t 78!&rdquo;</em>. Right, where is the problem? The problem is that we are including the number <code>15</code> twice. We have to subtract this number from the total to have the correct solution:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>3 * 6 * 7 / 2  = 63
+</span><span class='line'>                 +
+</span><span class='line'>5 * 3 * 4 / 2  = 30
+</span><span class='line'>                 -
+</span><span class='line'>15 * 1 * 2 / 2 = 15
+</span><span class='line'>               ------
+</span><span class='line'>                 78</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Why is this? Because 15 = 5 * 3, so we have to consider this number and all its multiples only once (as it should count as a multiple of 3 <strong>or</strong> a multiple of 5).</p>
+
+<p>Now we are very close to the alternate solution: there is just one more thing to consider: how do we get <code>N</code> to calculate the first <code>N</code> numbers? In our example we found the sum for the first 6 numbers for 3, the first 3 ones for 5 and 1 for 15. How did we find these values?</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>3 * (1+2+3+4+5+6) = 63 
+</span><span class='line'>                    +   
+</span><span class='line'>5 * (1+2+3)       = 30  
+</span><span class='line'>                    -   
+</span><span class='line'>15 * 1            = 15  
+</span><span class='line'>                  ------
+</span><span class='line'>                    78  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>It&rsquo;s very simple: we just have to divide the max value for the number and take the integer part of the result.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>20 / 3 = 6
+</span><span class='line'>
+</span><span class='line'>20 / 5 = 4
+</span><span class='line'>
+</span><span class='line'>20 / 15 = 1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the case of 5, we have to decrement by 1, because the max value is out of the range, that&rsquo;s why we got 3 instead of 4.</p>
+
+<h2>Alternate solution</h2>
+
+<p>So here is the alternate solution:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>n3 = 1000 / 3
+</span><span class='line'>n5 = (1000 / 5) - 1
+</span><span class='line'>n15 = (1000 / 15) 
+</span><span class='line'>
+</span><span class='line'>sum3 = 3 * n3 * (n3 + 1) / 2
+</span><span class='line'>sum5 = 5 * n5 * (n5 + 1) / 2
+</span><span class='line'>sum15 = 15 * n15 * (n15 + 1) / 2
+</span><span class='line'>
+</span><span class='line'>sum = sum3 + sum5 - sum15
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Giustino Borzacchiello</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-13T21:03:00+02:00" pubdate data-updated="true">Oct 13<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/euler/'>euler</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://JustB.github.io/project-euler-problem-1/" data-via="jubstuff" data-counturl="http://JustB.github.io/project-euler-problem-1/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/what-i-learned-13-10-2013/" title="Previous Post: What I learned - 13/10/2013">&laquo; What I learned - 13/10/2013</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Giustino Borzacchiello -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
