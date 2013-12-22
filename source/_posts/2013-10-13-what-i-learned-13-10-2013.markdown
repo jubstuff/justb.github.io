@@ -1,0 +1,17 @@
+---
+layout: post
+title: "What I learned - 13/10/2013"
+date: 2013-10-13 10:18:57
+comments: true
+categories: wil
+---
+
+## Create a zip on the command line (simple edition)
+
+How to create a zip file in Linux? All the latest version of Ubuntu have an _Compress_ entry in the contextual menu. But today I wanted to learn how to do it on the command line.
+
+It turned out to be pretty simple:
+
+```
+zip zipfile_name files_to_zip
+```
