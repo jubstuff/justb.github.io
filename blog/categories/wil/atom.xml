@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Wil | My Octopress Blog]]></title>
-  <link href="http://yoursite.com/blog/categories/wil/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
-  <updated>2013-12-22T16:25:43+00:00</updated>
-  <id>http://yoursite.com/</id>
+  <link href="http://JustB.github.io/blog/categories/wil/atom.xml" rel="self"/>
+  <link href="http://JustB.github.io/"/>
+  <updated>2013-12-22T16:39:06+00:00</updated>
+  <id>http://JustB.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[What I Learned - 13/10/2013]]></title>
-    <link href="http://yoursite.com/blog/2013/10/13/what-i-learned-13-10-2013/"/>
+    <link href="http://JustB.github.io/blog/2013/10/13/what-i-learned-13-10-2013/"/>
     <updated>2013-10-13T10:18:57+00:00</updated>
-    <id>http://yoursite.com/blog/2013/10/13/what-i-learned-13-10-2013</id>
+    <id>http://JustB.github.io/blog/2013/10/13/what-i-learned-13-10-2013</id>
     <content type="html"><![CDATA[<h2>Create a zip on the command line (simple edition)</h2>
 
 <p>How to create a zip file in Linux? All the latest version of Ubuntu have an <em>Compress</em> entry in the contextual menu. But today I wanted to learn how to do it on the command line.</p>
@@ -32,9 +32,9 @@ zip zipfile_name files_to_zip
   
   <entry>
     <title type="html"><![CDATA[What I Learned - 12/10/2013]]></title>
-    <link href="http://yoursite.com/blog/2013/10/12/what-i-learned-today-11-slash-10-slash-2013-edition/"/>
+    <link href="http://JustB.github.io/blog/2013/10/12/what-i-learned-today-11-slash-10-slash-2013-edition/"/>
     <updated>2013-10-12T15:50:03+00:00</updated>
-    <id>http://yoursite.com/blog/2013/10/12/what-i-learned-today-11-slash-10-slash-2013-edition</id>
+    <id>http://JustB.github.io/blog/2013/10/12/what-i-learned-today-11-slash-10-slash-2013-edition</id>
     <content type="html"><![CDATA[<h2>So what I learned today?</h2>
 
 <h3>Replace method in Python</h3>

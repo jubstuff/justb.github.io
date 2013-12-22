@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Euler | My Octopress Blog]]></title>
-  <link href="http://yoursite.com/blog/categories/euler/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
-  <updated>2013-12-22T16:25:43+00:00</updated>
-  <id>http://yoursite.com/</id>
+  <link href="http://JustB.github.io/blog/categories/euler/atom.xml" rel="self"/>
+  <link href="http://JustB.github.io/"/>
+  <updated>2013-12-22T16:39:06+00:00</updated>
+  <id>http://JustB.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
     
@@ -15,18 +15,14 @@
   
   <entry>
     <title type="html"><![CDATA[Project Euler - Problem 1]]></title>
-    <link href="http://yoursite.com/blog/2013/10/13/project-euler-problem-1/"/>
+    <link href="http://JustB.github.io/blog/2013/10/13/project-euler-problem-1/"/>
     <updated>2013-10-13T21:03:00+00:00</updated>
-    <id>http://yoursite.com/blog/2013/10/13/project-euler-problem-1</id>
+    <id>http://JustB.github.io/blog/2013/10/13/project-euler-problem-1</id>
     <content type="html"><![CDATA[<p>Today I started to solve the Project Euler problems. I don&rsquo;t know how much time I can spend solving these problems, but I hope to complete the <em>quest</em> in the span of a lifetime :).</p>
 
 <p>So here is the first problem:</p>
 
-<p>{% blockquote Problem 1 &ndash; Project Euler %}
-If we list all the natural numbers below 10 that are multiples of 3 and 5, we get 3, 5, 6, 9. The sum of these multiples is 23.</p>
-
-<p>Find the sum of all the multiples of 3 and 5 below 1000.
-{% endblockquote %}</p>
+<p><blockquote><p>If we list all the natural numbers below 10 that are multiples of 3 and 5, we get 3, 5, 6, 9. The sum of these multiples is 23.</p></p><p><p>Find the sum of all the multiples of 3 and 5 below 1000.</p><footer><strong>Problem 1 &ndash; Project Euler</strong></footer></blockquote></p>
 
 <p>The first try I could think of, was the obvious brute force approach. Cycle through all the numbers, and sum them up if they are multiples of 3 or 5:</p>
 

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[My Octopress Blog]]></title>
-  <link href="http://yoursite.com/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
-  <updated>2013-12-22T16:24:34+00:00</updated>
-  <id>http://yoursite.com/</id>
+  <link href="http://JustB.github.io/atom.xml" rel="self"/>
+  <link href="http://JustB.github.io/"/>
+  <updated>2013-12-22T16:39:06+00:00</updated>
+  <id>http://JustB.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Project Euler - Problem 1]]></title>
-    <link href="http://yoursite.com/blog/2013/10/13/project-euler-problem-1/"/>
+    <link href="http://JustB.github.io/blog/2013/10/13/project-euler-problem-1/"/>
     <updated>2013-10-13T21:03:00+00:00</updated>
-    <id>http://yoursite.com/blog/2013/10/13/project-euler-problem-1</id>
+    <id>http://JustB.github.io/blog/2013/10/13/project-euler-problem-1</id>
     <content type="html"><![CDATA[<p>Today I started to solve the Project Euler problems. I don&rsquo;t know how much time I can spend solving these problems, but I hope to complete the <em>quest</em> in the span of a lifetime :).</p>
 
 <p>So here is the first problem:</p>
@@ -205,9 +205,9 @@
   
   <entry>
     <title type="html"><![CDATA[What I Learned - 13/10/2013]]></title>
-    <link href="http://yoursite.com/blog/2013/10/13/what-i-learned-13-10-2013/"/>
+    <link href="http://JustB.github.io/blog/2013/10/13/what-i-learned-13-10-2013/"/>
     <updated>2013-10-13T10:18:57+00:00</updated>
-    <id>http://yoursite.com/blog/2013/10/13/what-i-learned-13-10-2013</id>
+    <id>http://JustB.github.io/blog/2013/10/13/what-i-learned-13-10-2013</id>
     <content type="html"><![CDATA[<h2>Create a zip on the command line (simple edition)</h2>
 
 <p>How to create a zip file in Linux? All the latest version of Ubuntu have an <em>Compress</em> entry in the contextual menu. But today I wanted to learn how to do it on the command line.</p>
@@ -222,9 +222,9 @@
   
   <entry>
     <title type="html"><![CDATA[What I Learned - 12/10/2013]]></title>
-    <link href="http://yoursite.com/blog/2013/10/12/what-i-learned-today-11-slash-10-slash-2013-edition/"/>
+    <link href="http://JustB.github.io/blog/2013/10/12/what-i-learned-today-11-slash-10-slash-2013-edition/"/>
     <updated>2013-10-12T15:50:03+00:00</updated>
-    <id>http://yoursite.com/blog/2013/10/12/what-i-learned-today-11-slash-10-slash-2013-edition</id>
+    <id>http://JustB.github.io/blog/2013/10/12/what-i-learned-today-11-slash-10-slash-2013-edition</id>
     <content type="html"><![CDATA[<h2>So what I learned today?</h2>
 
 <h3>Replace method in Python</h3>
@@ -253,12 +253,12 @@
   
   <entry>
     <title type="html"><![CDATA[Multiple Sums With Different Conditions in MySQL]]></title>
-    <link href="http://yoursite.com/blog/2012/12/17/multiple-sums-with-different-conditions-in-mysql/"/>
+    <link href="http://JustB.github.io/blog/2012/12/17/multiple-sums-with-different-conditions-in-mysql/"/>
     <updated>2012-12-17T20:52:52+00:00</updated>
-    <id>http://yoursite.com/blog/2012/12/17/multiple-sums-with-different-conditions-in-mysql</id>
+    <id>http://JustB.github.io/blog/2012/12/17/multiple-sums-with-different-conditions-in-mysql</id>
     <content type="html"><![CDATA[<p>Today I was working on my last project that involves some statistics on data. I had a table like this:</p>
 
-<p><img class="center" src="http://yoursite.com/images/tabella-1.png""></p>
+<p><img class="center" src="http://JustB.github.io/images/tabella-1.png""></p>
 
 <p>I needed the daily, monthly and yearly sum of the <code>value</code> field. How to do this?</p>
 
@@ -327,9 +327,9 @@
   
   <entry>
     <title type="html"><![CDATA[Bob Martin's Three Laws of TDD]]></title>
-    <link href="http://yoursite.com/blog/2012/09/15/bob-martin-three-laws-TDD/"/>
+    <link href="http://JustB.github.io/blog/2012/09/15/bob-martin-three-laws-TDD/"/>
     <updated>2012-09-15T09:00:21+00:00</updated>
-    <id>http://yoursite.com/blog/2012/09/15/bob-martin-three-laws-TDD</id>
+    <id>http://JustB.github.io/blog/2012/09/15/bob-martin-three-laws-TDD</id>
     <content type="html"><![CDATA[<blockquote><p>1. Do not write production code unless it is to make a failing unit test pass.<br/> 2. Do not write more of a unit test than is sufficient to fail, and build failures are failures.<br/> 3. Do not write more production code than is sufficient to pass the one failing unit test.<br/><br/>Even though this sounds restrictive, it is a very productive and fun way to develop software.</p><footer><strong>Bob Martin</strong> <cite><a href='http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd'>butunclebob.com/&hellip;</a></cite></footer></blockquote>
 
 
@@ -339,9 +339,9 @@
   
   <entry>
     <title type="html"><![CDATA[On Software Inventory]]></title>
-    <link href="http://yoursite.com/blog/2012/07/12/on-software-inventory/"/>
+    <link href="http://JustB.github.io/blog/2012/07/12/on-software-inventory/"/>
     <updated>2012-07-12T10:18:57+00:00</updated>
-    <id>http://yoursite.com/blog/2012/07/12/on-software-inventory</id>
+    <id>http://JustB.github.io/blog/2012/07/12/on-software-inventory</id>
     <content type="html"><![CDATA[<p>Few days ago Joel Spolsky published a post on his blog from the title: <a href="http://www.joelonsoftware.com/items/2012/07/09.html">&ldquo;Software Inventory&rdquo;</a>.
 In this post, he associates &ldquo;inventory costs&rdquo; to software, just like a traditional factory. Spolsky highlights these points where inventory piles up:</p>
 
