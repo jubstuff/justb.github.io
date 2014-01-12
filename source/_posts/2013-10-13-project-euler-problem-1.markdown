@@ -15,6 +15,7 @@ If we list all the natural numbers below 10 that are multiples of 3 and 5, we ge
 
 Find the sum of all the multiples of 3 and 5 below 1000.
 {% endblockquote %}
+<!--more-->
 
 The first try I could think of, was the obvious brute force approach. Cycle through all the numbers, and sum them up if they are multiples of 3 or 5:
 
