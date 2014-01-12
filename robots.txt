@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: 
-
-Sitemap: http://JustB.github.io/sitemap.xml 
