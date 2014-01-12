@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Quotes | My Octopress Blog]]></title>
+  <link href="http://JustB.github.io/blog/categories/quotes/atom.xml" rel="self"/>
+  <link href="http://JustB.github.io/"/>
+  <updated>2014-01-13T00:16:48+01:00</updated>
+  <id>http://JustB.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Bob Martin's Three Laws of TDD]]></title>
+    <link href="http://JustB.github.io/blog/2012/09/15/bob-martin-three-laws-TDD/"/>
+    <updated>2012-09-15T11:00:21+02:00</updated>
+    <id>http://JustB.github.io/blog/2012/09/15/bob-martin-three-laws-TDD</id>
+    <content type="html"><![CDATA[<p><blockquote><p></p></p><p><ol><br/><li>Do not write production code unless it is to make a failing unit test pass.</li><br/><li>Do not write more of a unit test than is sufficient to fail, and build failures are failures.</li><br/><li>Do not write more production code than is sufficient to pass the one failing unit test.</li><br/></ol></p><p><br/><p>Even though this sounds restrictive, it is a very productive and fun way to develop software.</p><footer><strong>Bob Martin <a href="http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd">http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd</a></strong></footer></blockquote></p>
+]]></content>
+  </entry>
+  
+</feed>
