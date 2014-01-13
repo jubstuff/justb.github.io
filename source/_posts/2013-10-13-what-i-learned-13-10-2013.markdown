@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "What I learned - 13/10/2013"
+title: "What I learned today - 13/10/2013 edition"
 date: 2013-10-13 10:18:57
 comments: true
-categories: wil
+categories: wilt
 ---
 
 ## Create a zip on the command line (simple edition)

@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "What I learned - 12/10/2013"
+title: "What I learned today - 12/10/2013 edition"
 date: 2013-10-12 15:50:03
 comments: true
-categories: wil 
+categories: wilt
 ---
 
 ##So what I learned today?
