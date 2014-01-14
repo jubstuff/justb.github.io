@@ -4,7 +4,7 @@
   <title><![CDATA[Jub's stuff]]></title>
   <link href="http://JustB.github.io/atom.xml" rel="self"/>
   <link href="http://JustB.github.io/"/>
-  <updated>2014-01-13T01:03:11+01:00</updated>
+  <updated>2014-01-14T02:17:19+01:00</updated>
   <id>http://JustB.github.io/</id>
   <author>
     <name><![CDATA[Giustino Borzacchiello]]></name>
@@ -12,6 +12,67 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[What I Learned Today - 14/01/2014]]></title>
+    <link href="http://JustB.github.io/blog/2014/01/14/what-i-learned-today-14-slash-01-slash-2014/"/>
+    <updated>2014-01-14T01:59:10+01:00</updated>
+    <id>http://JustB.github.io/blog/2014/01/14/what-i-learned-today-14-slash-01-slash-2014</id>
+    <content type="html"><![CDATA[<p>Today has been a good day. This morning I decided that I would begin my training as a runner. I ran for 10 minutes! (Yes, I&rsquo;m unfit. Sigh.).</p>
+
+<p>Anyway, this is not an health blog, but a programming one (I hope). So let&rsquo;s see what I learned today!</p>
+
+<!--more-->
+
+
+<h3>Smarty: dump variable and verbatim text</h3>
+
+<p>So I got this job, and I have to use Smarty. I know, I know, it&rsquo;s so 2000. But hey, it&rsquo;s work. I needed to dump some variables for a quick analysis. This is how it is done:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='smarty'><span class='line'><span class="cp">{</span> <span class="nv">$variable</span> <span class="o">|</span> <span class="na">print_r</span> <span class="cp">}</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Simple enough. Next, there where some errors regarding (brr) inline JavaScript. The { } where being processed by Smarty. They needed to be passed unfiltered. This is done using the <code>{literal}</code> tag:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='smarty'><span class='line'><span class="cp">{</span><span class="nf">literal</span><span class="cp">}</span><span class="x"></span>
+</span><span class='line'><span class="x">&lt;script&gt;</span>
+</span><span class='line'><span class="x">function foo() </span><span class="cp">{</span>
+</span><span class='line'>  <span class="na">console</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="s1">&#39;bar&#39;</span><span class="o">);</span>
+</span><span class='line'><span class="cp">}</span><span class="x"></span>
+</span><span class='line'><span class="x">&lt;/script&gt;</span>
+</span><span class='line'><span class="cp">{</span><span class="nf">/literal</span><span class="cp">}</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Copy text in the clipboard using Ruby in Linux</h3>
+
+<p>I created this blog using Octopress. To create a new post you have to issue <code>rake new_post['post title']</code>.
+Usually the filename is some mix of date and the title you typed. After creating the post you need to open it in Vim (or your favourite editor).
+So I modified the rake task to copy the filename in the clipboard, so that I don&rsquo;t have to type it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Creating new post: </span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="nb">system</span><span class="p">(</span><span class="s2">&quot;echo &#39;</span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39; | xclip&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You have to install the <code>xclip</code> package.</p>
+
+<h3>Cancel last search highlight in Vim</h3>
+
+<p>I hate it! <code>:set nohlsearch</code> FTW!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[What I Learned Today - 12/01/2014 Edition]]></title>
