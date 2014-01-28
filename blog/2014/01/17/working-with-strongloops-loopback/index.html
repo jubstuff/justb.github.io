@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Working With Strongloop's Loopback - Jub's stuff</title>
+  <meta name="author" content="Giustino Borzacchiello">
+
+  
+  <meta name="description" content="So I am working with Loopback by Strongloop. Creating models To create a model, you simply place a .js file in the models folder. After calling app. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://JustB.github.io/blog/2014/01/17/working-with-strongloops-loopback">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Jub's stuff" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Poller+One' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Germania+One' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fontdiner+Swanky' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Cardo' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Sorts+Mill+Goudy' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=EB+Garamond' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Della+Respira' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<logo>
+
+<img src="/logo.png" alt="Website Logo. Upload to /source/logo.png ; disable in /source/_includes/logo.html" height="32px" width="32px">
+</logo>
+
+
+
+<body >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jub's stuff</a></h1>
+  
+    <h2>Pensieri pensioggi.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+<br>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:JustB.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<!--
+<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+-->
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Working With Strongloop's Loopback</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-17T12:24:18+01:00" pubdate data-updated="true">Jan 17<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>So I am working with Loopback by Strongloop.</p>
+
+<h2>Creating models</h2>
+
+<p>To create a model, you simply place a .js file in the models folder. After calling app.boot, loopback will load all .js
+files automatically. But how to reference those models?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//models/product.js</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">Model</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;loopback&#39;</span><span class="p">).</span><span class="nx">Model</span><span class="p">;</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">Product</span> <span class="o">=</span> <span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="s1">&#39;product&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//Anywhere else</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">loopback</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;loopback&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">Product</span> <span class="o">=</span> <span class="nx">loopback</span><span class="p">.</span><span class="nx">getModel</span><span class="p">(</span><span class="s1">&#39;product&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Connecting to a MongoDb Database</h2>
+
+<p>To create a connection with a mongodb database (or for any other datasource, just replace mongo with its name), you have
+several choices.</p>
+
+<p>First, you can create it programmatically, using the <code>loopback.createDataSource</code> method. This method accepts a
+JavaScript object with these properties:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">loopback</span><span class="p">.</span><span class="nx">createDataSource</span><span class="p">({</span>
+</span><span class='line'>  <span class="nx">connector</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;loopback-connector-mongodb&#39;</span><span class="p">),</span>
+</span><span class='line'>  <span class="nx">host</span><span class="o">:</span> <span class="mf">127.0</span><span class="p">.</span><span class="mf">0.1</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">port</span><span class="o">:</span> <span class="mi">27017</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">database</span><span class="o">:</span> <span class="s1">&#39;myDatabaseName&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">username</span><span class="o">:</span> <span class="s1">&#39;myDatabaseUser&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;myPassword&#39;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Otherwise, you can specify your datasource in the <code>datasources.json</code> file in the root directory</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="s2">&quot;db&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;defaultForType&quot;</span><span class="o">:</span> <span class="s2">&quot;db&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;connector&quot;</span><span class="o">:</span> <span class="s2">&quot;mongodb&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;host&quot;</span><span class="o">:</span> <span class="mf">127.0</span><span class="p">.</span><span class="mf">0.1</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;port&quot;</span><span class="o">:</span> <span class="mi">27017</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;database&quot;</span><span class="o">:</span> <span class="s1">&#39;myDatabaseName&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;username&quot;</span><span class="o">:</span> <span class="s1">&#39;myDatabaseUser&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;password&quot;</span><span class="o">:</span> <span class="s1">&#39;myPassword&#39;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+  <footer>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://JustB.github.io/blog/2014/01/17/working-with-strongloops-loopback/" data-via="" data-counturl="http://JustB.github.io/blog/2014/01/17/working-with-strongloops-loopback/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Text authored by <span class="fn">Giustino Borzacchiello</span></span>
+
+
+      
+
+
+    </p>
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/01/14/what-i-learned-today-14-slash-01-slash-2014/" title="Previous Post: What I learned today - 14/01/2014">&laquo; What I learned today - 14/01/2014</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Website copyright &copy; 2014 - Giustino Borzacchiello |
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/TheChymera/Koenigspress">Königspress</a></span>.
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

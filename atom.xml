@@ -4,7 +4,7 @@
   <title><![CDATA[Jub's stuff]]></title>
   <link href="http://JustB.github.io/atom.xml" rel="self"/>
   <link href="http://JustB.github.io/"/>
-  <updated>2014-01-14T02:17:19+01:00</updated>
+  <updated>2014-01-29T00:48:27+01:00</updated>
   <id>http://JustB.github.io/</id>
   <author>
     <name><![CDATA[Giustino Borzacchiello]]></name>
@@ -12,6 +12,92 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Working With Strongloop's Loopback]]></title>
+    <link href="http://JustB.github.io/blog/2014/01/17/working-with-strongloops-loopback/"/>
+    <updated>2014-01-17T12:24:18+01:00</updated>
+    <id>http://JustB.github.io/blog/2014/01/17/working-with-strongloops-loopback</id>
+    <content type="html"><![CDATA[<p>So I am working with Loopback by Strongloop.</p>
+
+<h2>Creating models</h2>
+
+<p>To create a model, you simply place a .js file in the models folder. After calling app.boot, loopback will load all .js
+files automatically. But how to reference those models?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//models/product.js</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">Model</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;loopback&#39;</span><span class="p">).</span><span class="nx">Model</span><span class="p">;</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">Product</span> <span class="o">=</span> <span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="s1">&#39;product&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//Anywhere else</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">loopback</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;loopback&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">Product</span> <span class="o">=</span> <span class="nx">loopback</span><span class="p">.</span><span class="nx">getModel</span><span class="p">(</span><span class="s1">&#39;product&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Connecting to a MongoDb Database</h2>
+
+<p>To create a connection with a mongodb database (or for any other datasource, just replace mongo with its name), you have
+several choices.</p>
+
+<p>First, you can create it programmatically, using the <code>loopback.createDataSource</code> method. This method accepts a
+JavaScript object with these properties:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">loopback</span><span class="p">.</span><span class="nx">createDataSource</span><span class="p">({</span>
+</span><span class='line'>  <span class="nx">connector</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;loopback-connector-mongodb&#39;</span><span class="p">),</span>
+</span><span class='line'>  <span class="nx">host</span><span class="o">:</span> <span class="mf">127.0</span><span class="p">.</span><span class="mf">0.1</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">port</span><span class="o">:</span> <span class="mi">27017</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">database</span><span class="o">:</span> <span class="s1">&#39;myDatabaseName&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">username</span><span class="o">:</span> <span class="s1">&#39;myDatabaseUser&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;myPassword&#39;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Otherwise, you can specify your datasource in the <code>datasources.json</code> file in the root directory</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="s2">&quot;db&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;defaultForType&quot;</span><span class="o">:</span> <span class="s2">&quot;db&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;connector&quot;</span><span class="o">:</span> <span class="s2">&quot;mongodb&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;host&quot;</span><span class="o">:</span> <span class="mf">127.0</span><span class="p">.</span><span class="mf">0.1</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;port&quot;</span><span class="o">:</span> <span class="mi">27017</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;database&quot;</span><span class="o">:</span> <span class="s1">&#39;myDatabaseName&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;username&quot;</span><span class="o">:</span> <span class="s1">&#39;myDatabaseUser&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;password&quot;</span><span class="o">:</span> <span class="s1">&#39;myPassword&#39;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[What I Learned Today - 14/01/2014]]></title>
@@ -131,6 +217,25 @@ I&rsquo;ve learned much, though. I&rsquo;ve pushed the Windows development envir
 <li><a href="http://build-podcast.com/">Build podcasts</a>: an on-going series of podcasts on web development tools.</li>
 </ul>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Your First Post]]></title>
+    <link href="http://JustB.github.io/blog/2013/12/28/lorem/"/>
+    <updated>2013-12-28T16:49:17+01:00</updated>
+    <id>http://JustB.github.io/blog/2013/12/28/lorem</id>
+    <content type="html"><![CDATA[<p>This is a lipsum page to demonstrate the theme&rsquo;s typography. Modify this post to your heart&rsquo;s content &ndash; or simply delete it.</p>
+
+<p>Lorem ipsum dolor sit amet, ut brute legimus honestatis cum. Eirmod verear mei ne, id falli conclusionemque est, autem populo duo et. Causae noluisse ex sed. Solet mentitum salutandi ad mei, vis ex esse prima nullam, tation melius aliquid pri ea. Minimum sententiae mei ad, mei et reque novum.</p>
+
+<p>Eu nec eirmod inermis, nominavi deleniti electram ut mei. Veri quidam vivendum sit id, voluptaria percipitur deterruisset an nec. Mei mazim erroribus eu, his in errem nonumy comprehensam. Modo pericula duo id, te vis facete verear. Ex cum volutpat corrumpit aliquando, ad vim assentior argumentum temporibus.</p>
+
+<p>Id est eros justo movet, duo eu alii vitae. Quo altera imperdiet efficiantur in, nec error iudico an. Sed an etiam consul, invenire platonem nam an. Nec an integre splendide, libris oportere duo ei. Has eu solet sententiae, ex nam noster tractatos, sonet patrioque nec ad.</p>
+
+<p>An minim mollis mediocrem est, lucilius atomorum ex eum. Quaeque probatus qui cu, ut mutat dolorem epicurei pro, vel labores delicata rationibus et. Cu eos sumo inermis, viderer molestiae assueverit ius ad. Cum atqui error insolens in. Iuvaret adolescens referrentur cu pri.</p>
+
+<p>Ei putant perfecto atomorum eos, an civibus hendrerit sit. Pri cu probo nominavi, et sea cetero hendrerit incorrupte. Amet unum prompta per at, impedit reprehendunt an cum, vix laudem dolorem at. Suas blandit molestie in eum.</p>
 ]]></content>
   </entry>
   

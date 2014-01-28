@@ -2,54 +2,62 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://JustB.github.io/blog/2012/07/12/on-software-inventory/</loc>
-        <lastmod>2014-01-13T00:08:05+01:00</lastmod>
+        <lastmod>2014-01-29T00:47:35+01:00</lastmod>
     </url>
     <url>
         <loc>http://JustB.github.io/blog/2012/09/15/bob-martin-three-laws-TDD/</loc>
-        <lastmod>2014-01-13T00:08:05+01:00</lastmod>
+        <lastmod>2014-01-29T00:47:35+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://JustB.github.io/blog/2012/12/17/multiple-sums-with-different-conditions-in-mysql/
         </loc>
-        <lastmod>2014-01-13T00:08:05+01:00</lastmod>
+        <lastmod>2014-01-29T00:47:35+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://JustB.github.io/blog/2013/10/12/what-i-learned-today-11-slash-10-slash-2013-edition/
         </loc>
-        <lastmod>2014-01-13T01:02:40+01:00</lastmod>
+        <lastmod>2014-01-29T00:47:35+01:00</lastmod>
     </url>
     <url>
         <loc>http://JustB.github.io/blog/2013/10/13/what-i-learned-13-10-2013/</loc>
-        <lastmod>2014-01-13T01:02:11+01:00</lastmod>
+        <lastmod>2014-01-29T00:47:35+01:00</lastmod>
     </url>
     <url>
         <loc>http://JustB.github.io/blog/2013/10/13/project-euler-problem-1/</loc>
-        <lastmod>2014-01-13T00:32:15+01:00</lastmod>
+        <lastmod>2014-01-29T00:47:35+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://JustB.github.io/blog/2013/12/28/lorem/</loc>
+        <lastmod>2014-01-29T00:47:35+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://JustB.github.io/blog/2014/01/13/what-i-learned-today-12-slash-01-slash-2014-edition/
         </loc>
-        <lastmod>2014-01-13T01:01:38+01:00</lastmod>
+        <lastmod>2014-01-29T00:47:35+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://JustB.github.io/blog/2014/01/14/what-i-learned-today-14-slash-01-slash-2014/
         </loc>
-        <lastmod>2014-01-14T02:17:12+01:00</lastmod>
+        <lastmod>2014-01-29T00:47:35+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://JustB.github.io/blog/2014/01/17/working-with-strongloops-loopback/</loc>
+        <lastmod>2014-01-29T00:47:35+01:00</lastmod>
     </url>
     <url>
         <loc>http://JustB.github.io/blog/archives/</loc>
-        <lastmod>2014-01-14T02:17:12+01:00</lastmod>
+        <lastmod>2014-01-29T00:47:35+01:00</lastmod>
     </url>
     <url>
         <loc>http://JustB.github.io/robots.txt</loc>
-        <lastmod>2014-01-12T23:57:49+01:00</lastmod>
+        <lastmod>2014-01-29T00:47:35+01:00</lastmod>
     </url>
     <url>
         <loc>http://JustB.github.io/</loc>
-        <lastmod>2014-01-14T02:17:12+01:00</lastmod>
+        <lastmod>2014-01-29T00:47:35+01:00</lastmod>
     </url>
 </urlset>

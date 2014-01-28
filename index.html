@@ -9,7 +9,7 @@
   <meta name="author" content="Giustino Borzacchiello">
 
   
-  <meta name="description" content="Today has been a good day. This morning I decided that I would begin my training as a runner. I ran for 10 minutes! (Yes, I&rsquo;m unfit. Sigh.). &hellip;">
+  <meta name="description" content="So I am working with Loopback by Strongloop. Creating models To create a model, you simply place a .js file in the models folder. After calling app. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -29,12 +29,30 @@
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Poller+One' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Germania+One' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fontdiner+Swanky' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Cardo' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Sorts+Mill+Goudy' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=EB+Garamond' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Della+Respira' rel='stylesheet' type='text/css'>
 
   
 
 </head>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<logo>
 
-<body   >
+<img src="/logo.png" alt="Website Logo. Upload to /source/logo.png ; disable in /source/_includes/logo.html" height="32px" width="32px">
+</logo>
+
+
+
+<body >
   <header role="banner"><hgroup>
   <h1><a href="/">Jub's stuff</a></h1>
   
@@ -43,10 +61,12 @@
 </hgroup>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
+  <nav role="navigation"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
 </ul>
+
+<br>
   
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
@@ -55,16 +75,131 @@
   </fieldset>
 </form>
   
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+<!--
+<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
 </ul>
+-->
 
 </nav>
   <div id="main">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/17/working-with-strongloops-loopback/">Working With Strongloop&#8217;s Loopback</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-17T12:24:18+01:00" pubdate data-updated="true">Jan 17<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>So I am working with Loopback by Strongloop.</p>
+
+<h2>Creating models</h2>
+
+<p>To create a model, you simply place a .js file in the models folder. After calling app.boot, loopback will load all .js
+files automatically. But how to reference those models?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//models/product.js</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">Model</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;loopback&#39;</span><span class="p">).</span><span class="nx">Model</span><span class="p">;</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">Product</span> <span class="o">=</span> <span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="s1">&#39;product&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//Anywhere else</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">loopback</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;loopback&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">Product</span> <span class="o">=</span> <span class="nx">loopback</span><span class="p">.</span><span class="nx">getModel</span><span class="p">(</span><span class="s1">&#39;product&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Connecting to a MongoDb Database</h2>
+
+<p>To create a connection with a mongodb database (or for any other datasource, just replace mongo with its name), you have
+several choices.</p>
+
+<p>First, you can create it programmatically, using the <code>loopback.createDataSource</code> method. This method accepts a
+JavaScript object with these properties:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">loopback</span><span class="p">.</span><span class="nx">createDataSource</span><span class="p">({</span>
+</span><span class='line'>  <span class="nx">connector</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;loopback-connector-mongodb&#39;</span><span class="p">),</span>
+</span><span class='line'>  <span class="nx">host</span><span class="o">:</span> <span class="mf">127.0</span><span class="p">.</span><span class="mf">0.1</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">port</span><span class="o">:</span> <span class="mi">27017</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">database</span><span class="o">:</span> <span class="s1">&#39;myDatabaseName&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">username</span><span class="o">:</span> <span class="s1">&#39;myDatabaseUser&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;myPassword&#39;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Otherwise, you can specify your datasource in the <code>datasources.json</code> file in the root directory</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="s2">&quot;db&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;defaultForType&quot;</span><span class="o">:</span> <span class="s2">&quot;db&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;connector&quot;</span><span class="o">:</span> <span class="s2">&quot;mongodb&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;host&quot;</span><span class="o">:</span> <span class="mf">127.0</span><span class="p">.</span><span class="mf">0.1</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;port&quot;</span><span class="o">:</span> <span class="mi">27017</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;database&quot;</span><span class="o">:</span> <span class="s1">&#39;myDatabaseName&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;username&quot;</span><span class="o">:</span> <span class="s1">&#39;myDatabaseUser&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;password&quot;</span><span class="o">:</span> <span class="s1">&#39;myPassword&#39;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -153,6 +288,52 @@ I&rsquo;ve learned much, though. I&rsquo;ve pushed the Windows development envir
     <footer>
       <a rel="full-article" href="/blog/2014/01/13/what-i-learned-today-12-slash-01-slash-2014-edition/">Read on &rarr;</a>
     </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/28/lorem/">Your First Post</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-28T16:49:17+01:00" pubdate data-updated="true">Dec 28<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is a lipsum page to demonstrate the theme&rsquo;s typography. Modify this post to your heart&rsquo;s content &ndash; or simply delete it.</p>
+
+<p>Lorem ipsum dolor sit amet, ut brute legimus honestatis cum. Eirmod verear mei ne, id falli conclusionemque est, autem populo duo et. Causae noluisse ex sed. Solet mentitum salutandi ad mei, vis ex esse prima nullam, tation melius aliquid pri ea. Minimum sententiae mei ad, mei et reque novum.</p>
+
+<p>Eu nec eirmod inermis, nominavi deleniti electram ut mei. Veri quidam vivendum sit id, voluptaria percipitur deterruisset an nec. Mei mazim erroribus eu, his in errem nonumy comprehensam. Modo pericula duo id, te vis facete verear. Ex cum volutpat corrumpit aliquando, ad vim assentior argumentum temporibus.</p>
+
+<p>Id est eros justo movet, duo eu alii vitae. Quo altera imperdiet efficiantur in, nec error iudico an. Sed an etiam consul, invenire platonem nam an. Nec an integre splendide, libris oportere duo ei. Has eu solet sententiae, ex nam noster tractatos, sonet patrioque nec ad.</p>
+
+<p>An minim mollis mediocrem est, lucilius atomorum ex eum. Quaeque probatus qui cu, ut mutat dolorem epicurei pro, vel labores delicata rationibus et. Cu eos sumo inermis, viderer molestiae assueverit ius ad. Cum atqui error insolens in. Iuvaret adolescens referrentur cu pri.</p>
+
+<p>Ei putant perfecto atomorum eos, an civibus hendrerit sit. Pri cu probo nominavi, et sea cetero hendrerit incorrupte. Amet unum prompta per at, impedit reprehendunt an cum, vix laudem dolorem at. Suas blandit molestie in eum.</p>
+</div>
+  
   
 
 
@@ -459,47 +640,12 @@ starts to get klunky if you have too many cards in one list.
     
   </div>
 </div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2014/01/14/what-i-learned-today-14-slash-01-slash-2014/">What I Learned Today - 14/01/2014</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/13/what-i-learned-today-12-slash-01-slash-2014-edition/">What I Learned Today - 12/01/2014 Edition</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/13/project-euler-problem-1/">Project Euler - Problem 1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/13/what-i-learned-13-10-2013/">What I Learned Today - 13/10/2013 Edition</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/12/what-i-learned-today-11-slash-10-slash-2013-edition/">What I Learned Today - 12/10/2013 Edition</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-
-
-  
-</aside>
 
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Giustino Borzacchiello -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+  Website copyright &copy; 2014 - Giustino Borzacchiello |
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/TheChymera/Koenigspress">Königspress</a></span>.
 </p>
 
 </footer>
