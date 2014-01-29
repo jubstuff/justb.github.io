@@ -6,7 +6,7 @@ comments: true
 categories: programming
 ---
 
-Few days ago Joel Spolsky published a post on his blog from the title: <a href="http://www.joelonsoftware.com/items/2012/07/09.html">"Software Inventory"</a>. 
+Few days ago Joel Spolsky published a post on his blog from the title: <a href="http://www.joelonsoftware.com/items/2012/07/09.html">"Software Inventory"</a>.
 In this post, he associates "inventory costs" to software, just like a traditional factory. Spolsky highlights these points where inventory piles up:
 
  * Feature backlogs
@@ -24,9 +24,9 @@ So, I like the idea that moves [Trello](https://trello.com/), the project manage
 
 <blockquote>
   Trello works great for a reasonable amount of inventory, but it <strong>intentionally</strong>
-starts to get klunky if you have too many cards in one list. 
+starts to get klunky if you have too many cards in one list.
 </blockquote>
 
-Just like a crowded deskm, Trello is difficult to manage if there are too many cards.
+Just like a crowded desk, Trello is difficult to manage if there are too many cards.
 
-In the end, there are advantegs in the absence of phisicity, but we must consider the hidden costs that very often are ignored.
+In the end, there are advantages in the absence of phisicity, but we must consider the hidden costs that very often are ignored.
