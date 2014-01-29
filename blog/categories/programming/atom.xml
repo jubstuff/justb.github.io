@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Programming | Jub's stuff]]></title>
+  <title><![CDATA[Category: Programming | Il minuto giusto]]></title>
   <link href="http://JustB.github.io/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://JustB.github.io/"/>
-  <updated>2014-01-29T00:48:27+01:00</updated>
+  <updated>2014-01-29T01:05:20+01:00</updated>
   <id>http://JustB.github.io/</id>
   <author>
     <name><![CDATA[Giustino Borzacchiello]]></name>
@@ -39,13 +39,13 @@ All the things that slow down the development process <strong>must hurt</strong>
 
 <blockquote>
   Trello works great for a reasonable amount of inventory, but it <strong>intentionally</strong>
-starts to get klunky if you have too many cards in one list. 
+starts to get klunky if you have too many cards in one list.
 </blockquote>
 
 
-<p>Just like a crowded deskm, Trello is difficult to manage if there are too many cards.</p>
+<p>Just like a crowded desk, Trello is difficult to manage if there are too many cards.</p>
 
-<p>In the end, there are advantegs in the absence of phisicity, but we must consider the hidden costs that very often are ignored.</p>
+<p>In the end, there are advantages in the absence of phisicity, but we must consider the hidden costs that very often are ignored.</p>
 ]]></content>
   </entry>
   

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Jub's stuff]]></title>
+  <title><![CDATA[Il minuto giusto]]></title>
   <link href="http://JustB.github.io/atom.xml" rel="self"/>
   <link href="http://JustB.github.io/"/>
-  <updated>2014-01-29T00:48:27+01:00</updated>
+  <updated>2014-01-29T01:05:20+01:00</updated>
   <id>http://JustB.github.io/</id>
   <author>
     <name><![CDATA[Giustino Borzacchiello]]></name>
@@ -217,25 +217,6 @@ I&rsquo;ve learned much, though. I&rsquo;ve pushed the Windows development envir
 <li><a href="http://build-podcast.com/">Build podcasts</a>: an on-going series of podcasts on web development tools.</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Your First Post]]></title>
-    <link href="http://JustB.github.io/blog/2013/12/28/lorem/"/>
-    <updated>2013-12-28T16:49:17+01:00</updated>
-    <id>http://JustB.github.io/blog/2013/12/28/lorem</id>
-    <content type="html"><![CDATA[<p>This is a lipsum page to demonstrate the theme&rsquo;s typography. Modify this post to your heart&rsquo;s content &ndash; or simply delete it.</p>
-
-<p>Lorem ipsum dolor sit amet, ut brute legimus honestatis cum. Eirmod verear mei ne, id falli conclusionemque est, autem populo duo et. Causae noluisse ex sed. Solet mentitum salutandi ad mei, vis ex esse prima nullam, tation melius aliquid pri ea. Minimum sententiae mei ad, mei et reque novum.</p>
-
-<p>Eu nec eirmod inermis, nominavi deleniti electram ut mei. Veri quidam vivendum sit id, voluptaria percipitur deterruisset an nec. Mei mazim erroribus eu, his in errem nonumy comprehensam. Modo pericula duo id, te vis facete verear. Ex cum volutpat corrumpit aliquando, ad vim assentior argumentum temporibus.</p>
-
-<p>Id est eros justo movet, duo eu alii vitae. Quo altera imperdiet efficiantur in, nec error iudico an. Sed an etiam consul, invenire platonem nam an. Nec an integre splendide, libris oportere duo ei. Has eu solet sententiae, ex nam noster tractatos, sonet patrioque nec ad.</p>
-
-<p>An minim mollis mediocrem est, lucilius atomorum ex eum. Quaeque probatus qui cu, ut mutat dolorem epicurei pro, vel labores delicata rationibus et. Cu eos sumo inermis, viderer molestiae assueverit ius ad. Cum atqui error insolens in. Iuvaret adolescens referrentur cu pri.</p>
-
-<p>Ei putant perfecto atomorum eos, an civibus hendrerit sit. Pri cu probo nominavi, et sea cetero hendrerit incorrupte. Amet unum prompta per at, impedit reprehendunt an cum, vix laudem dolorem at. Suas blandit molestie in eum.</p>
 ]]></content>
   </entry>
   
@@ -591,13 +572,13 @@ All the things that slow down the development process <strong>must hurt</strong>
 
 <blockquote>
   Trello works great for a reasonable amount of inventory, but it <strong>intentionally</strong>
-starts to get klunky if you have too many cards in one list. 
+starts to get klunky if you have too many cards in one list.
 </blockquote>
 
 
-<p>Just like a crowded deskm, Trello is difficult to manage if there are too many cards.</p>
+<p>Just like a crowded desk, Trello is difficult to manage if there are too many cards.</p>
 
-<p>In the end, there are advantegs in the absence of phisicity, but we must consider the hidden costs that very often are ignored.</p>
+<p>In the end, there are advantages in the absence of phisicity, but we must consider the hidden costs that very often are ignored.</p>
 ]]></content>
   </entry>
   
