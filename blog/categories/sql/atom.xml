@@ -4,7 +4,7 @@
   <title><![CDATA[Category: SQL | Little Right's Journal]]></title>
   <link href="http://JustB.github.io/blog/categories/sql/atom.xml" rel="self"/>
   <link href="http://JustB.github.io/"/>
-  <updated>2014-02-01T00:59:01+01:00</updated>
+  <updated>2014-02-01T01:03:34+01:00</updated>
   <id>http://JustB.github.io/</id>
   <author>
     <name><![CDATA[Giustino Borzacchiello]]></name>
@@ -50,19 +50,19 @@ WHERE YEAR(time)=YEAR(CURDATE());
 SELECT
   SUM(CASE WHEN DATE(time)=CURDATE()</p>
 
-<pre><code>THEN value 
+<pre><code>THEN value
 ELSE 0 end) AS value_day,
 </code></pre>
 
 <p>  SUM(CASE WHEN MONTH(time)=MONTH(CURDATE()) AND YEAR(time)=YEAR(CURDATE())</p>
 
-<pre><code>THEN value 
+<pre><code>THEN value
 ELSE 0 end) AS value_month,
 </code></pre>
 
 <p>  SUM(CASE WHEN YEAR(time)=YEAR(CURDATE())</p>
 
-<pre><code>THEN value 
+<pre><code>THEN value
 ELSE 0 end) AS value_year
 </code></pre>
 
