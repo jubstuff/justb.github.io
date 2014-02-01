@@ -18,33 +18,33 @@ I needed the daily, monthly and yearly sum of the <code>value</code> field. How 
 The simplest approach was to have three different queries to retrieve the needed values:
 
 
-``` sql 
+``` sql
 --day
-SELECT SUM(value) 
-FROM table 
+SELECT SUM(value)
+FROM table
 WHERE DATE(time)=CURDATE();
 -- month
-SELECT SUM(value) 
-FROM table 
+SELECT SUM(value)
+FROM table
 WHERE MONTH(time)=MONTH(CURDATE()) AND YEAR(time)=YEAR(CURDATE());
 -- year
-SELECT SUM(value) 
-FROM table 
+SELECT SUM(value)
+FROM table
 WHERE YEAR(time)=YEAR(CURDATE());
 ```
 
 But I wasn't satisfied. I wanted to have all three values using only one query. So I searched for this issue and this is the resulting query:
 
-``` sql 
-SELECT 
-  SUM(CASE WHEN DATE(time)=CURDATE() 
-    THEN value 
+``` sql
+SELECT
+  SUM(CASE WHEN DATE(time)=CURDATE()
+    THEN value
     ELSE 0 end) AS value_day,
-  SUM(CASE WHEN MONTH(time)=MONTH(CURDATE()) AND YEAR(time)=YEAR(CURDATE()) 
-    THEN value 
+  SUM(CASE WHEN MONTH(time)=MONTH(CURDATE()) AND YEAR(time)=YEAR(CURDATE())
+    THEN value
     ELSE 0 end) AS value_month,
-  SUM(CASE WHEN YEAR(time)=YEAR(CURDATE()) 
-    THEN value 
+  SUM(CASE WHEN YEAR(time)=YEAR(CURDATE())
+    THEN value
     ELSE 0 end) AS value_year
 FROM table
 ```
