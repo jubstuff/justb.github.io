@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Grails | Little Right's Journal]]></title>
+  <link href="http://JustB.github.io/blog/categories/grails/atom.xml" rel="self"/>
+  <link href="http://JustB.github.io/"/>
+  <updated>2014-02-13T00:47:13+01:00</updated>
+  <id>http://JustB.github.io/</id>
+  <author>
+    <name><![CDATA[Giustino Borzacchiello]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Setting Up a Vagrant Machine for Grails Development]]></title>
+    <link href="http://JustB.github.io/blog/2014/02/12/setting-up-a-vagrant-machine-for-grails-development/"/>
+    <updated>2014-02-12T23:21:27+01:00</updated>
+    <id>http://JustB.github.io/blog/2014/02/12/setting-up-a-vagrant-machine-for-grails-development</id>
+    <content type="html"><![CDATA[<p>Recently I&rsquo;ve tried several times to integrate <a href="http://www.vagrantup.com/">Vagrant</a> in my development flow, without success. So, now that I have to start
+Grails development I decided to setup a development enviroment first.</p>
+
+<p>I used Vagrant with <a href="https://www.virtualbox.org/">Virtualbox</a> and <a href="http://puppetlabs.com/">Puppet</a> for provisioning.</p>
+
+<p>For the impatient, you can <a href="https://github.com/JustB/vagrant-grails">clone this repo</a> and go with <code>vagrant up</code> to get a fully functional grails
+environment. If you want to know what&rsquo;s inside, keep on reading.</p>
+
+<h2>Initial setup</h2>
+
+<p>First install Vagrant and Virtualbox. Then create a folder and initialize the Vagrant machine:</p>
+
+<p><code>
+$ mkdir vagrant_grails &amp;&amp; cd vagrant_grails
+$ vagrant box add base http://files.vagrantup.com/precise32.box
+$ vagrant init base
+</code></p>
+
+<p>Then open the newly created <code>Vagrantfile</code> and add these lines (or uncomment the relevant ones):</p>
+
+<p><code>
+config.vm.provision :puppet do |puppet|
+  puppet.manifests_path = "manifests"
+  puppet.manifest_file  = "default.pp"
+  puppet.module_path = "modules"
+end
+</code></p>
+
+<p>Vagrant will look for a <code>default.pp</code> file under the <code>manifests</code> folder and for any missing modules
+under the <code>modules</code> folder. So let&rsquo;s create them:</p>
+
+<p><code>
+$ mkdir modules
+$ mkdir manifests
+$ touch manifests/default.pp
+</code></p>
+
+<h2>Installing required Puppet modules</h2>
+
+<p>We&rsquo;ll need some modules from the Puppet forge: specifically <a href="https://forge.puppetlabs.com/puppetlabs/apt">apt</a> and <a href="https://forge.puppetlabs.com/puppetlabs/stdlib">stdlib</a>. You can clone them
+under the <code>modules</code> folder, or you can download the archives and extract them. It&rsquo;s up to you.</p>
+
+<h2>Installing Java</h2>
+
+<p>We&rsquo;re ready to start. We need Java for Grails to work, so let&rsquo;s get this settled. Unfortunately
+since Java was acquired from Oracle it isn&rsquo;t available as a package in Ubuntu repositories. So we&rsquo;ll
+need to add a ppa that has a package that will let us download the Java installer. The problem is,
+this package require us to accept a license agreement. So we&rsquo;ll need to automatically accept it.
+Write this in the <code>default.pp</code>:</p>
+
+<p>```
+class grails {
+  include apt
+  apt::ppa { &ldquo;ppa:webupd8team/java&rdquo;: }</p>
+
+<p>  exec { &lsquo;apt-get update&rsquo;:</p>
+
+<pre><code>command =&gt; '/usr/bin/apt-get update',
+before =&gt; Apt::Ppa["ppa:webupd8team/java"],
+</code></pre>
+
+<p>  }</p>
+
+<p>  exec { &lsquo;apt-get update 2&rsquo;:</p>
+
+<pre><code>command =&gt; '/usr/bin/apt-get update',
+require =&gt; [ Apt::Ppa["ppa:webupd8team/java"], Package["git-core"] ],
+</code></pre>
+
+<p>  }</p>
+
+<p>  package { [&ldquo;vim&rdquo;,</p>
+
+<pre><code>         "curl",
+         "git-core",
+         "bash"]:
+ensure =&gt; present,
+require =&gt; Exec["apt-get update"],
+before =&gt; Apt::Ppa["ppa:webupd8team/java"],
+</code></pre>
+
+<p>  }</p>
+
+<p>  package { [&ldquo;oracle-java7-installer&rdquo;]:</p>
+
+<pre><code>ensure =&gt; present,
+require =&gt; Exec["apt-get update 2"],
+</code></pre>
+
+<p>  }</p>
+
+<p>  exec {</p>
+
+<pre><code>"accept_license":
+command =&gt; "echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections &amp;&amp; echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections",
+cwd =&gt; "/home/vagrant",
+user =&gt; "vagrant",
+path    =&gt; "/usr/bin/:/bin/",
+before =&gt; Package["oracle-java7-installer"],
+logoutput =&gt; true,
+</code></pre>
+
+<p>  }
+}</p>
+
+<p>include grails
+```
+The task are very simple: we update the repositories, add the webupd8team ppa, then we update the
+repositories again. Then we install the Java installer and set the flag to accept the license,
+without it asking us. In this way we&rsquo;ll get a fully automated installation.</p>
+
+<h2>Installing Grails</h2>
+
+<p>Now we need to install Grails. The steps are very similar: we&rsquo;ll add a PPA (as it is stated in the
+<a href="http://grails.org/download/ubuntu">Grails docs</a>) and install the package. We&rsquo;ll also need to set the <code>JAVA_HOME</code> environment variable
+that is needed by Grails. Here is the full Puppet manifest:</p>
+
+<p>```
+class grails {
+  include apt
+  apt::ppa { &ldquo;ppa:webupd8team/java&rdquo;: }
+  apt::ppa { &ldquo;ppa:groovy-dev/grails&rdquo;: }</p>
+
+<p>  exec { &lsquo;apt-get update&rsquo;:</p>
+
+<pre><code>command =&gt; '/usr/bin/apt-get update',
+before =&gt; Apt::Ppa["ppa:webupd8team/java"],
+</code></pre>
+
+<p>  }</p>
+
+<p>  exec { &lsquo;apt-get update 2&rsquo;:</p>
+
+<pre><code>command =&gt; '/usr/bin/apt-get update',
+require =&gt; [ Apt::Ppa["ppa:webupd8team/java"], Apt::Ppa["ppa:groovy-dev/grails"], Package["git-core"] ],
+</code></pre>
+
+<p>  }</p>
+
+<p>  package { [&ldquo;vim&rdquo;,</p>
+
+<pre><code>         "curl",
+         "git-core",
+         "bash"]:
+ensure =&gt; present,
+require =&gt; Exec["apt-get update"],
+before =&gt; Apt::Ppa["ppa:webupd8team/java"],
+</code></pre>
+
+<p>  }</p>
+
+<p>  package { [&ldquo;oracle-java7-installer&rdquo;]:</p>
+
+<pre><code>ensure =&gt; present,
+require =&gt; Exec["apt-get update 2"],
+</code></pre>
+
+<p>  }</p>
+
+<p>  exec {</p>
+
+<pre><code>"accept_license":
+command =&gt; "echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections &amp;&amp; echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections",
+cwd =&gt; "/home/vagrant",
+user =&gt; "vagrant",
+path    =&gt; "/usr/bin/:/bin/",
+before =&gt; Package["oracle-java7-installer"],
+logoutput =&gt; true,
+</code></pre>
+
+<p>  }</p>
+
+<p>  package { [&ldquo;grails-ppa&rdquo;]:</p>
+
+<pre><code>ensure =&gt; present,
+require =&gt; Package["oracle-java7-installer"],
+</code></pre>
+
+<p>  }</p>
+
+<p>  exec { &ldquo;add_java_home&rdquo;:</p>
+
+<pre><code>command =&gt; '/bin/echo "export JAVA_HOME=/usr/lib/jvm/java-7-oracle" &gt;&gt; /home/vagrant/.bashrc',
+</code></pre>
+
+<p>  }
+}</p>
+
+<p>include grails
+```</p>
+
+<h2>Starting the machine</h2>
+
+<p>Now you only need to start your machine.</p>
+
+<p><code>bash
+$ vagrant up
+$ vagrant ssh
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

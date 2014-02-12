@@ -4,7 +4,7 @@
   <title><![CDATA[Little Right's Journal]]></title>
   <link href="http://JustB.github.io/atom.xml" rel="self"/>
   <link href="http://JustB.github.io/"/>
-  <updated>2014-02-01T01:03:34+01:00</updated>
+  <updated>2014-02-13T00:47:13+01:00</updated>
   <id>http://JustB.github.io/</id>
   <author>
     <name><![CDATA[Giustino Borzacchiello]]></name>
@@ -12,6 +12,276 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Setting Up a Vagrant Machine for Grails Development]]></title>
+    <link href="http://JustB.github.io/blog/2014/02/12/setting-up-a-vagrant-machine-for-grails-development/"/>
+    <updated>2014-02-12T23:21:27+01:00</updated>
+    <id>http://JustB.github.io/blog/2014/02/12/setting-up-a-vagrant-machine-for-grails-development</id>
+    <content type="html"><![CDATA[<p>Recently I&rsquo;ve tried several times to integrate <a href="http://www.vagrantup.com/">Vagrant</a> in my development flow, without success. So, now that I have to start
+Grails development I decided to setup a development enviroment first.</p>
+
+<p>I used Vagrant with <a href="https://www.virtualbox.org/">Virtualbox</a> and <a href="http://puppetlabs.com/">Puppet</a> for provisioning.</p>
+
+<p>For the impatient, you can <a href="https://github.com/JustB/vagrant-grails">clone this repo</a> and go with <code>vagrant up</code> to get a fully functional grails
+environment. If you want to know what&rsquo;s inside, keep on reading.</p>
+
+<h2>Initial setup</h2>
+
+<p>First install Vagrant and Virtualbox. Then create a folder and initialize the Vagrant machine:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ mkdir vagrant_grails && cd vagrant_grails
+</span><span class='line'>$ vagrant box add base http://files.vagrantup.com/precise32.box
+</span><span class='line'>$ vagrant init base</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then open the newly created <code>Vagrantfile</code> and add these lines (or uncomment the relevant ones):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>config.vm.provision :puppet do |puppet|
+</span><span class='line'>  puppet.manifests_path = "manifests"
+</span><span class='line'>  puppet.manifest_file  = "default.pp"
+</span><span class='line'>  puppet.module_path = "modules"
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Vagrant will look for a <code>default.pp</code> file under the <code>manifests</code> folder and for any missing modules
+under the <code>modules</code> folder. So let&rsquo;s create them:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ mkdir modules
+</span><span class='line'>$ mkdir manifests
+</span><span class='line'>$ touch manifests/default.pp</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Installing required Puppet modules</h2>
+
+<p>We&rsquo;ll need some modules from the Puppet forge: specifically <a href="https://forge.puppetlabs.com/puppetlabs/apt">apt</a> and <a href="https://forge.puppetlabs.com/puppetlabs/stdlib">stdlib</a>. You can clone them
+under the <code>modules</code> folder, or you can download the archives and extract them. It&rsquo;s up to you.</p>
+
+<h2>Installing Java</h2>
+
+<p>We&rsquo;re ready to start. We need Java for Grails to work, so let&rsquo;s get this settled. Unfortunately
+since Java was acquired from Oracle it isn&rsquo;t available as a package in Ubuntu repositories. So we&rsquo;ll
+need to add a ppa that has a package that will let us download the Java installer. The problem is,
+this package require us to accept a license agreement. So we&rsquo;ll need to automatically accept it.
+Write this in the <code>default.pp</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class grails {
+</span><span class='line'>  include apt
+</span><span class='line'>  apt::ppa { "ppa:webupd8team/java": }
+</span><span class='line'>
+</span><span class='line'>  exec { 'apt-get update':
+</span><span class='line'>    command =&gt; '/usr/bin/apt-get update',
+</span><span class='line'>    before =&gt; Apt::Ppa["ppa:webupd8team/java"],
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  exec { 'apt-get update 2':
+</span><span class='line'>    command =&gt; '/usr/bin/apt-get update',
+</span><span class='line'>    require =&gt; [ Apt::Ppa["ppa:webupd8team/java"], Package["git-core"] ],
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  package { ["vim",
+</span><span class='line'>             "curl",
+</span><span class='line'>             "git-core",
+</span><span class='line'>             "bash"]:
+</span><span class='line'>    ensure =&gt; present,
+</span><span class='line'>    require =&gt; Exec["apt-get update"],
+</span><span class='line'>    before =&gt; Apt::Ppa["ppa:webupd8team/java"],
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  package { ["oracle-java7-installer"]:
+</span><span class='line'>    ensure =&gt; present,
+</span><span class='line'>    require =&gt; Exec["apt-get update 2"],
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  exec {
+</span><span class='line'>    "accept_license":
+</span><span class='line'>    command =&gt; "echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections && echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections",
+</span><span class='line'>    cwd =&gt; "/home/vagrant",
+</span><span class='line'>    user =&gt; "vagrant",
+</span><span class='line'>    path    =&gt; "/usr/bin/:/bin/",
+</span><span class='line'>    before =&gt; Package["oracle-java7-installer"],
+</span><span class='line'>    logoutput =&gt; true,
+</span><span class='line'>  }
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>include grails</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The task are very simple: we update the repositories, add the webupd8team ppa, then we update the
+repositories again. Then we install the Java installer and set the flag to accept the license,
+without it asking us. In this way we&rsquo;ll get a fully automated installation.</p>
+
+<h2>Installing Grails</h2>
+
+<p>Now we need to install Grails. The steps are very similar: we&rsquo;ll add a PPA (as it is stated in the
+<a href="http://grails.org/download/ubuntu">Grails docs</a>) and install the package. We&rsquo;ll also need to set the <code>JAVA_HOME</code> environment variable
+that is needed by Grails. Here is the full Puppet manifest:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class grails {
+</span><span class='line'>  include apt
+</span><span class='line'>  apt::ppa { "ppa:webupd8team/java": }
+</span><span class='line'>  apt::ppa { "ppa:groovy-dev/grails": }
+</span><span class='line'>
+</span><span class='line'>  exec { 'apt-get update':
+</span><span class='line'>    command =&gt; '/usr/bin/apt-get update',
+</span><span class='line'>    before =&gt; Apt::Ppa["ppa:webupd8team/java"],
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  exec { 'apt-get update 2':
+</span><span class='line'>    command =&gt; '/usr/bin/apt-get update',
+</span><span class='line'>    require =&gt; [ Apt::Ppa["ppa:webupd8team/java"], Apt::Ppa["ppa:groovy-dev/grails"], Package["git-core"] ],
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  package { ["vim",
+</span><span class='line'>             "curl",
+</span><span class='line'>             "git-core",
+</span><span class='line'>             "bash"]:
+</span><span class='line'>    ensure =&gt; present,
+</span><span class='line'>    require =&gt; Exec["apt-get update"],
+</span><span class='line'>    before =&gt; Apt::Ppa["ppa:webupd8team/java"],
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  package { ["oracle-java7-installer"]:
+</span><span class='line'>    ensure =&gt; present,
+</span><span class='line'>    require =&gt; Exec["apt-get update 2"],
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  exec {
+</span><span class='line'>    "accept_license":
+</span><span class='line'>    command =&gt; "echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections && echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections",
+</span><span class='line'>    cwd =&gt; "/home/vagrant",
+</span><span class='line'>    user =&gt; "vagrant",
+</span><span class='line'>    path    =&gt; "/usr/bin/:/bin/",
+</span><span class='line'>    before =&gt; Package["oracle-java7-installer"],
+</span><span class='line'>    logoutput =&gt; true,
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  package { ["grails-ppa"]:
+</span><span class='line'>    ensure =&gt; present,
+</span><span class='line'>    require =&gt; Package["oracle-java7-installer"],
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  exec { "add_java_home":
+</span><span class='line'>    command =&gt; '/bin/echo "export JAVA_HOME=/usr/lib/jvm/java-7-oracle" &gt;&gt; /home/vagrant/.bashrc',
+</span><span class='line'>  }
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>include grails</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Starting the machine</h2>
+
+<p>Now you only need to start your machine.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>vagrant up
+</span><span class='line'><span class="nv">$ </span>vagrant ssh
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Working With Strongloop's Loopback]]></title>
