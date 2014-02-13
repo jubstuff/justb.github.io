@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Tools | Little Right's Journal]]></title>
+  <link href="http://JustB.github.io/blog/categories/tools/atom.xml" rel="self"/>
+  <link href="http://JustB.github.io/"/>
+  <updated>2014-02-13T13:28:55+01:00</updated>
+  <id>http://JustB.github.io/</id>
+  <author>
+    <name><![CDATA[Giustino Borzacchiello]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Pdftk Tips and Commands]]></title>
+    <link href="http://JustB.github.io/blog/2014/02/13/pdftk-tips/"/>
+    <updated>2014-02-13T13:20:43+01:00</updated>
+    <id>http://JustB.github.io/blog/2014/02/13/pdftk-tips</id>
+    <content type="html"><![CDATA[<p>Often I need to manipulate in some way PDF files. On Windows, the best tool is Adobe Acrobat. But there is one downside: it costs way too much!
+<a href="http://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/">Pdftk</a> is a wonderful command line tool that lets you manipulate PDF files. It is free and you can install it even on Windows.</p>
+
+<p>Here are some useful commands that I use:</p>
+
+<p>```</p>
+
+<h1>buil a PDF out of different PDF files</h1>
+
+<h1>Syntax is: Astartpage-endpage</h1>
+
+<p>justb:~/pdftk
+⇒ pdftk A=file1.pdf B=file2.pdf C=file3.pdf cat A1 B1 A3 C1 A5-end output output.pdf
+```</p>
+]]></content>
+  </entry>
+  
+</feed>
