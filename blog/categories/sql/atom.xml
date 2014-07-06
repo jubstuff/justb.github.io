@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: SQL | Little Right's Journal]]></title>
+  <title><![CDATA[Category: Sql | Little Right's Journal]]></title>
   <link href="http://JustB.github.io/blog/categories/sql/atom.xml" rel="self"/>
   <link href="http://JustB.github.io/"/>
-  <updated>2014-02-13T13:28:55+01:00</updated>
+  <updated>2014-07-06T23:43:28+02:00</updated>
   <id>http://JustB.github.io/</id>
   <author>
     <name><![CDATA[Giustino Borzacchiello]]></name>
