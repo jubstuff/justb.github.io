@@ -3,7 +3,7 @@ layout: post
 title: "Pdftk tips and commands"
 date: 2014-02-13 13:20:43 +0100
 comments: true
-categories: tips, tools
+categories: tips tools
 ---
 
 Often I need to manipulate in some way PDF files. On Windows, the best tool is Adobe Acrobat. But there is one downside: it costs way too much!
