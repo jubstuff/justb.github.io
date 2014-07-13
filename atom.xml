@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Little Right's Journal]]></title>
-  <link href="http://JustB.github.io/atom.xml" rel="self"/>
-  <link href="http://JustB.github.io/"/>
-  <updated>2014-07-06T23:50:32+02:00</updated>
-  <id>http://JustB.github.io/</id>
+  <link href="http://dev.borzacchiello.it/atom.xml" rel="self"/>
+  <link href="http://dev.borzacchiello.it/"/>
+  <updated>2014-07-13T16:48:15+02:00</updated>
+  <id>http://dev.borzacchiello.it/</id>
   <author>
     <name><![CDATA[Giustino Borzacchiello]]></name>
     
@@ -14,10 +14,239 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Posting to Twitter With Python]]></title>
+    <link href="http://dev.borzacchiello.it/blog/2014/07/12/posting-to-twitter-with-python/"/>
+    <updated>2014-07-12T20:12:50+02:00</updated>
+    <id>http://dev.borzacchiello.it/blog/2014/07/12/posting-to-twitter-with-python</id>
+    <content type="html"><![CDATA[<p>In my spare time I am working on a simple <a href="https://bufferapp.com/">Buffer</a> clone to post my links on various socials without having the limitation of the Free plan nor the Awesome plan.
+I decided to code it in Python, because I want to leave the PHP world and add a new skill to my resume.</p>
+
+<p>I begin working by studying the different methods for posting on socials, and today was <strong>Twitter day</strong>.</p>
+
+<h2>First step: RTFM</h2>
+
+<p>Before searching on Google <em>&ldquo;Post Twitter Python&rdquo;</em> I wanted to read <a href="https://dev.twitter.com/docs/">Twitter documentation</a>. The <a href="https://dev.twitter.com/docs/api">REST API</a> was the one that seemed to fit what I needed,
+so I went on and read the <a href="https://dev.twitter.com/docs/api/1.1/post/statuses/update">POST statuses/update</a> page.</p>
+
+<p>To post a tweet you need to issue a <code>POST</code> request to <code>https://api.twitter.com/1.1/statuses/update.json</code> with a <code>status</code> parameter. The request must be signed
+using OAuth.</p>
+
+<p>Twitter offers <a href="https://dev.twitter.com/docs/auth/obtaining-access-tokens">different methods for authentication</a> in order to get the necessary access tokens to issue requests. As I need this application only for personal use,
+I decided to use the <a href="https://dev.twitter.com/docs/auth/tokens-devtwittercom">dev.twitter.com authentication</a>, that enables you to post from your personal account. Simply create a new Twitter application and generate
+the access tokens<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. There is an example in the documentation so I thought that I was almost done.</p>
+
+<h2>Getting the home timeline (aka Twitter docs are outdated)</h2>
+
+<p>Unfortunately, Twitter documentation for Python dev.twitter.com authentication is outdated, as it uses the <a href="https://github.com/brosner/python-oauth2">Brosner&rsquo;s Python-OAuth2 library</a> that was updated 5 years ago. So I searched for a more recent implementation of the OAuth protocol for Python and I found <a href="https://github.com/litl/rauth">rauth</a>. There is an <a href="https://github.com/litl/rauth/blob/master/examples/twitter-timeline-cli.py">example in the README</a> that show how to make a request to Twitter&rsquo;s API. But this example (shown below) is for the complete <a href="https://dev.twitter.com/docs/auth/3-legged-authorization">three-legged authentication method</a> and I didn&rsquo;t need that.</p>
+
+<figure class='code'><figcaption><span>rauth basic example for 3-legged authentication</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">rauth</span> <span class="kn">import</span> <span class="n">OAuth1Service</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">try</span><span class="p">:</span>
+</span><span class='line'><span class="n">read_input</span> <span class="o">=</span> <span class="nb">raw_input</span>
+</span><span class='line'><span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+</span><span class='line'><span class="n">read_input</span> <span class="o">=</span> <span class="nb">input</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Get a real consumer key &amp; secret from https://dev.twitter.com/apps/new</span>
+</span><span class='line'><span class="n">twitter</span> <span class="o">=</span> <span class="n">OAuth1Service</span><span class="p">(</span>
+</span><span class='line'>        <span class="n">name</span><span class="o">=</span><span class="s">&#39;twitter&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">consumer_key</span><span class="o">=</span><span class="s">&#39;J8MoJG4bQ9gcmGh8H7XhMg&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">consumer_secret</span><span class="o">=</span><span class="s">&#39;7WAscbSy65GmiVOvMU5EBYn5z80fhQkcFWSLMJJu4&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">request_token_url</span><span class="o">=</span><span class="s">&#39;https://api.twitter.com/oauth/request_token&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">access_token_url</span><span class="o">=</span><span class="s">&#39;https://api.twitter.com/oauth/access_token&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">authorize_url</span><span class="o">=</span><span class="s">&#39;https://api.twitter.com/oauth/authorize&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">base_url</span><span class="o">=</span><span class="s">&#39;https://api.twitter.com/1.1/&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">request_token</span><span class="p">,</span> <span class="n">request_token_secret</span> <span class="o">=</span> <span class="n">twitter</span><span class="o">.</span><span class="n">get_request_token</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">authorize_url</span> <span class="o">=</span> <span class="n">twitter</span><span class="o">.</span><span class="n">get_authorize_url</span><span class="p">(</span><span class="n">request_token</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">print</span><span class="p">(</span><span class="s">&#39;Visit this URL in your browser: {url}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">authorize_url</span><span class="p">))</span>
+</span><span class='line'><span class="n">pin</span> <span class="o">=</span> <span class="n">read_input</span><span class="p">(</span><span class="s">&#39;Enter PIN from browser: &#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">session</span> <span class="o">=</span> <span class="n">twitter</span><span class="o">.</span><span class="n">get_auth_session</span><span class="p">(</span><span class="n">request_token</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">request_token_secret</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">method</span><span class="o">=</span><span class="s">&#39;POST&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;oauth_verifier&#39;</span><span class="p">:</span> <span class="n">pin</span><span class="p">})</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;include_rts&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c"># Include retweets</span>
+</span><span class='line'>    <span class="s">&#39;count&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>       <span class="c"># 10 tweets</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">r</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;statuses/home_timeline.json&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">(),</span> <span class="mi">1</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">handle</span> <span class="o">=</span> <span class="n">tweet</span><span class="p">[</span><span class="s">&#39;user&#39;</span><span class="p">][</span><span class="s">&#39;screen_name&#39;</span><span class="p">]</span>
+</span><span class='line'>    <span class="n">text</span> <span class="o">=</span> <span class="n">tweet</span><span class="p">[</span><span class="s">&#39;text&#39;</span><span class="p">]</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="s">u&#39;{0}. @{1} - {2}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">handle</span><span class="p">,</span> <span class="n">text</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see, to get the access tokens, you&rsquo;ll need to get the pin from the authorization url. But with the dev.twitter.com authentication, I already have those tokens. So I just need to get the session, no need for authorization:</p>
+
+<figure class='code'><figcaption><span>rauth basic example for dev.twitter.com authentication</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">rauth</span> <span class="kn">import</span> <span class="n">OAuth1Service</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Get a real consumer key &amp; secret from https://dev.twitter.com/apps/new</span>
+</span><span class='line'><span class="n">twitter</span> <span class="o">=</span> <span class="n">OAuth1Service</span><span class="p">(</span>
+</span><span class='line'>        <span class="n">name</span><span class="o">=</span><span class="s">&#39;twitter&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">consumer_key</span><span class="o">=</span><span class="s">&#39;1uUMxRkNp9oTplhnVh1pz96cj&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">consumer_secret</span><span class="o">=</span><span class="s">&#39;aBa89p6W96aS1sMAzzWCiH18gz5UxJNkQR4Tbeyb767pmST1dC&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">request_token_url</span><span class="o">=</span><span class="s">&#39;https://api.twitter.com/oauth/request_token&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">access_token_url</span><span class="o">=</span><span class="s">&#39;https://api.twitter.com/oauth/access_token&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">authorize_url</span><span class="o">=</span><span class="s">&#39;https://api.twitter.com/oauth/authorize&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">base_url</span><span class="o">=</span><span class="s">&#39;https://api.twitter.com/1.1/&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">request_token</span> <span class="o">=</span> <span class="n">MY_KEY</span>
+</span><span class='line'><span class="n">request_token_secret</span> <span class="o">=</span> <span class="n">MY_SECRET</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">authorize_url</span> <span class="o">=</span> <span class="n">twitter</span><span class="o">.</span><span class="n">get_authorize_url</span><span class="p">(</span><span class="n">request_token</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">session</span> <span class="o">=</span> <span class="n">twitter</span><span class="o">.</span><span class="n">get_session</span><span class="p">((</span><span class="n">request_token</span><span class="p">,</span> <span class="n">request_token_secret</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;include_rts&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c"># Include retweets</span>
+</span><span class='line'>    <span class="s">&#39;count&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>       <span class="c"># 10 tweets</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">r</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;statuses/home_timeline.json&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">(),</span> <span class="mi">1</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">handle</span> <span class="o">=</span> <span class="n">tweet</span><span class="p">[</span><span class="s">&#39;user&#39;</span><span class="p">][</span><span class="s">&#39;screen_name&#39;</span><span class="p">]</span>
+</span><span class='line'>    <span class="n">text</span> <span class="o">=</span> <span class="n">tweet</span><span class="p">[</span><span class="s">&#39;text&#39;</span><span class="p">]</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="s">u&#39;{0}. @{1} - {2}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">handle</span><span class="p">,</span> <span class="n">text</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The method that did the trick was <a href="https://rauth.readthedocs.org/en/latest/api/?highlight=get_session#rauth.OAuth1Service.get_session">get_session</a> that takes a tuple containing your access tokens
+and get the current session. With that, I was able to call the Twitter APIs.</p>
+
+<h2>Posting to Twitter</h2>
+
+<p>I was almost done. To post to Twitter I needed to change the <code>get</code> method into a <code>post</code> and change the API endpoint and
+parameters. So here is the final example:</p>
+
+<figure class='code'><figcaption><span>Posting to Twitter with Python</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">rauth</span> <span class="kn">import</span> <span class="n">OAuth1Service</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">twitter</span> <span class="o">=</span> <span class="n">OAuth1Service</span><span class="p">(</span>
+</span><span class='line'>            <span class="n">name</span><span class="o">=</span><span class="s">&#39;twitter&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">consumer_key</span><span class="o">=</span><span class="n">APP_CONSUMER_KEY</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">consumer_secret</span><span class="o">=</span><span class="n">APP_CONSUMER_SECRET</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">request_token_url</span><span class="o">=</span><span class="s">&#39;https://api.twitter.com/oauth/request_token&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">access_token_url</span><span class="o">=</span><span class="s">&#39;https://api.twitter.com/oauth/access_token&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">authorize_url</span><span class="o">=</span><span class="s">&#39;https://api.twitter.com/oauth/authorize&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">base_url</span><span class="o">=</span><span class="s">&#39;https://api.twitter.com/1.1/&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">request_token</span> <span class="o">=</span> <span class="n">MY_KEY</span>
+</span><span class='line'>    <span class="n">request_token_secret</span> <span class="o">=</span> <span class="n">MY_SECRET</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">session</span> <span class="o">=</span> <span class="n">twitter</span><span class="o">.</span><span class="n">get_session</span><span class="p">((</span><span class="n">request_token</span><span class="p">,</span> <span class="n">request_token_secret</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;status&#39;</span><span class="p">:</span> <span class="s">&#39;Tweet from Python&#39;</span><span class="p">}</span>
+</span><span class='line'>    <span class="n">r</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">&#39;statuses/update.json&#39;</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Ensure that you have given your applicaton the &ldquo;Read/Write&rdquo; permission, before generating the tokens.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Pdftk Tips and Commands]]></title>
-    <link href="http://JustB.github.io/blog/2014/02/13/pdftk-tips/"/>
+    <link href="http://dev.borzacchiello.it/blog/2014/02/13/pdftk-tips/"/>
     <updated>2014-02-13T13:20:43+01:00</updated>
-    <id>http://JustB.github.io/blog/2014/02/13/pdftk-tips</id>
+    <id>http://dev.borzacchiello.it/blog/2014/02/13/pdftk-tips</id>
     <content type="html"><![CDATA[<p>Often I need to manipulate in some way PDF files. On Windows, the best tool is Adobe Acrobat. But there is one downside: it costs way too much!
 <a href="http://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/">Pdftk</a> is a wonderful command line tool that lets you manipulate PDF files. It is free and you can install it even on Windows.</p>
 
@@ -39,9 +268,9 @@
   
   <entry>
     <title type="html"><![CDATA[Setting Up a Vagrant Machine for Grails Development]]></title>
-    <link href="http://JustB.github.io/blog/2014/02/12/setting-up-a-vagrant-machine-for-grails-development/"/>
+    <link href="http://dev.borzacchiello.it/blog/2014/02/12/setting-up-a-vagrant-machine-for-grails-development/"/>
     <updated>2014-02-12T23:21:27+01:00</updated>
-    <id>http://JustB.github.io/blog/2014/02/12/setting-up-a-vagrant-machine-for-grails-development</id>
+    <id>http://dev.borzacchiello.it/blog/2014/02/12/setting-up-a-vagrant-machine-for-grails-development</id>
     <content type="html"><![CDATA[<p>Recently I&rsquo;ve tried several times to integrate <a href="http://www.vagrantup.com/">Vagrant</a> in my development flow, without success. So, now that I have to start
 Grails development I decided to setup a development enviroment first.</p>
 
@@ -309,9 +538,9 @@ that is needed by Grails. Here is the full Puppet manifest:</p>
   
   <entry>
     <title type="html"><![CDATA[Working With Strongloop's Loopback]]></title>
-    <link href="http://JustB.github.io/blog/2014/01/17/working-with-strongloops-loopback/"/>
+    <link href="http://dev.borzacchiello.it/blog/2014/01/17/working-with-strongloops-loopback/"/>
     <updated>2014-01-17T12:24:18+01:00</updated>
-    <id>http://JustB.github.io/blog/2014/01/17/working-with-strongloops-loopback</id>
+    <id>http://dev.borzacchiello.it/blog/2014/01/17/working-with-strongloops-loopback</id>
     <content type="html"><![CDATA[<p>So I am working with Loopback by Strongloop.</p>
 
 <h2>Creating models</h2>
@@ -395,9 +624,9 @@ JavaScript object with these properties:</p>
   
   <entry>
     <title type="html"><![CDATA[What I Learned Today - 14/01/2014]]></title>
-    <link href="http://JustB.github.io/blog/2014/01/14/what-i-learned-today-14-slash-01-slash-2014/"/>
+    <link href="http://dev.borzacchiello.it/blog/2014/01/14/what-i-learned-today-14-slash-01-slash-2014/"/>
     <updated>2014-01-14T01:59:10+01:00</updated>
-    <id>http://JustB.github.io/blog/2014/01/14/what-i-learned-today-14-slash-01-slash-2014</id>
+    <id>http://dev.borzacchiello.it/blog/2014/01/14/what-i-learned-today-14-slash-01-slash-2014</id>
     <content type="html"><![CDATA[<p>Today has been a good day. This morning I decided that I would begin my training as a runner. I ran for 10 minutes! (Yes, I&rsquo;m unfit. Sigh.).</p>
 
 <p>Anyway, this is not an health blog, but a programming one (I hope). So let&rsquo;s see what I learned today!</p>
@@ -456,9 +685,9 @@ So I modified the rake task to copy the filename in the clipboard, so that I don
   
   <entry>
     <title type="html"><![CDATA[What I Learned Today - 12/01/2014 Edition]]></title>
-    <link href="http://JustB.github.io/blog/2014/01/13/what-i-learned-today-12-slash-01-slash-2014-edition/"/>
+    <link href="http://dev.borzacchiello.it/blog/2014/01/13/what-i-learned-today-12-slash-01-slash-2014-edition/"/>
     <updated>2014-01-13T00:36:12+01:00</updated>
-    <id>http://JustB.github.io/blog/2014/01/13/what-i-learned-today-12-slash-01-slash-2014-edition</id>
+    <id>http://dev.borzacchiello.it/blog/2014/01/13/what-i-learned-today-12-slash-01-slash-2014-edition</id>
     <content type="html"><![CDATA[<p>Today was a strange day. I took the resolution to install again Linux on my work laptop, after a year or so of <em>Windows only</em>.
 &ldquo;Why did you do <strong>that</strong>?&rdquo; you could ask. I don&rsquo;t know.</p>
 
@@ -516,9 +745,9 @@ I&rsquo;ve learned much, though. I&rsquo;ve pushed the Windows development envir
   
   <entry>
     <title type="html"><![CDATA[Project Euler - Problem 1]]></title>
-    <link href="http://JustB.github.io/blog/2013/10/13/project-euler-problem-1/"/>
+    <link href="http://dev.borzacchiello.it/blog/2013/10/13/project-euler-problem-1/"/>
     <updated>2013-10-13T21:03:00+02:00</updated>
-    <id>http://JustB.github.io/blog/2013/10/13/project-euler-problem-1</id>
+    <id>http://dev.borzacchiello.it/blog/2013/10/13/project-euler-problem-1</id>
     <content type="html"><![CDATA[<p>Today I started to solve the Project Euler problems. I don&rsquo;t know how much time I can spend solving these problems, but I hope to complete the <em>quest</em> in the span of a lifetime :).</p>
 
 <p>So here is the first problem:</p>
@@ -708,9 +937,9 @@ I&rsquo;ve learned much, though. I&rsquo;ve pushed the Windows development envir
   
   <entry>
     <title type="html"><![CDATA[What I Learned Today - 13/10/2013 Edition]]></title>
-    <link href="http://JustB.github.io/blog/2013/10/13/what-i-learned-13-10-2013/"/>
+    <link href="http://dev.borzacchiello.it/blog/2013/10/13/what-i-learned-13-10-2013/"/>
     <updated>2013-10-13T12:18:57+02:00</updated>
-    <id>http://JustB.github.io/blog/2013/10/13/what-i-learned-13-10-2013</id>
+    <id>http://dev.borzacchiello.it/blog/2013/10/13/what-i-learned-13-10-2013</id>
     <content type="html"><![CDATA[<h2>Create a zip on the command line (simple edition)</h2>
 
 <p>How to create a zip file in Linux? All the latest version of Ubuntu have an <em>Compress</em> entry in the contextual menu. But today I wanted to learn how to do it on the command line.</p>
@@ -725,9 +954,9 @@ I&rsquo;ve learned much, though. I&rsquo;ve pushed the Windows development envir
   
   <entry>
     <title type="html"><![CDATA[What I Learned Today - 12/10/2013 Edition]]></title>
-    <link href="http://JustB.github.io/blog/2013/10/12/what-i-learned-today-11-slash-10-slash-2013-edition/"/>
+    <link href="http://dev.borzacchiello.it/blog/2013/10/12/what-i-learned-today-11-slash-10-slash-2013-edition/"/>
     <updated>2013-10-12T17:50:03+02:00</updated>
-    <id>http://JustB.github.io/blog/2013/10/12/what-i-learned-today-11-slash-10-slash-2013-edition</id>
+    <id>http://dev.borzacchiello.it/blog/2013/10/12/what-i-learned-today-11-slash-10-slash-2013-edition</id>
     <content type="html"><![CDATA[<h2>So what I learned today?</h2>
 
 <h3>Replace method in Python</h3>
@@ -756,12 +985,12 @@ I&rsquo;ve learned much, though. I&rsquo;ve pushed the Windows development envir
   
   <entry>
     <title type="html"><![CDATA[Multiple Sums With Different Conditions in MySQL]]></title>
-    <link href="http://JustB.github.io/blog/2012/12/17/multiple-sums-with-different-conditions-in-mysql/"/>
+    <link href="http://dev.borzacchiello.it/blog/2012/12/17/multiple-sums-with-different-conditions-in-mysql/"/>
     <updated>2012-12-17T21:52:52+01:00</updated>
-    <id>http://JustB.github.io/blog/2012/12/17/multiple-sums-with-different-conditions-in-mysql</id>
+    <id>http://dev.borzacchiello.it/blog/2012/12/17/multiple-sums-with-different-conditions-in-mysql</id>
     <content type="html"><![CDATA[<p>Today I was working on my last project that involves some statistics on data. I had a table like this:</p>
 
-<p><img class="center" src="http://JustB.github.io/images/tabella-1.png""></p>
+<p><img class="center" src="http://dev.borzacchiello.it/images/tabella-1.png""></p>
 
 <p>I needed the daily, monthly and yearly sum of the <code>value</code> field. How to do this?</p>
 
@@ -830,9 +1059,9 @@ I&rsquo;ve learned much, though. I&rsquo;ve pushed the Windows development envir
   
   <entry>
     <title type="html"><![CDATA[Bob Martin's Three Laws of TDD]]></title>
-    <link href="http://JustB.github.io/blog/2012/09/15/bob-martin-three-laws-TDD/"/>
+    <link href="http://dev.borzacchiello.it/blog/2012/09/15/bob-martin-three-laws-TDD/"/>
     <updated>2012-09-15T11:00:21+02:00</updated>
-    <id>http://JustB.github.io/blog/2012/09/15/bob-martin-three-laws-TDD</id>
+    <id>http://dev.borzacchiello.it/blog/2012/09/15/bob-martin-three-laws-TDD</id>
     <content type="html"><![CDATA[<blockquote><p>1. Do not write production code unless it is to make a failing unit test pass.<br/> 2. Do not write more of a unit test than is sufficient to fail, and build failures are failures.<br/> 3. Do not write more production code than is sufficient to pass the one failing unit test.</p><p>Even though this sounds restrictive, it is a very productive and fun way to develop software.</p><footer><strong>Bob Martin</strong> <cite><a href='http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd'>butunclebob.com/&hellip;</a></cite></footer></blockquote>
 
 
@@ -842,9 +1071,9 @@ I&rsquo;ve learned much, though. I&rsquo;ve pushed the Windows development envir
   
   <entry>
     <title type="html"><![CDATA[On Software Inventory]]></title>
-    <link href="http://JustB.github.io/blog/2012/07/12/on-software-inventory/"/>
+    <link href="http://dev.borzacchiello.it/blog/2012/07/12/on-software-inventory/"/>
     <updated>2012-07-12T12:18:57+02:00</updated>
-    <id>http://JustB.github.io/blog/2012/07/12/on-software-inventory</id>
+    <id>http://dev.borzacchiello.it/blog/2012/07/12/on-software-inventory</id>
     <content type="html"><![CDATA[<p>Few days ago Joel Spolsky published a post on his blog from the title: <a href="http://www.joelonsoftware.com/items/2012/07/09.html">&ldquo;Software Inventory&rdquo;</a>.
 In this post, he associates &ldquo;inventory costs&rdquo; to software, just like a traditional factory. Spolsky highlights these points where inventory piles up:</p>
 

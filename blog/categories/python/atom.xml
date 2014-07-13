@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Python | Little Right's Journal]]></title>
+  <link href="http://dev.borzacchiello.it/blog/categories/python/atom.xml" rel="self"/>
+  <link href="http://dev.borzacchiello.it/"/>
+  <updated>2014-07-13T16:48:15+02:00</updated>
+  <id>http://dev.borzacchiello.it/</id>
+  <author>
+    <name><![CDATA[Giustino Borzacchiello]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Posting to Twitter With Python]]></title>
+    <link href="http://dev.borzacchiello.it/blog/2014/07/12/posting-to-twitter-with-python/"/>
+    <updated>2014-07-12T20:12:50+02:00</updated>
+    <id>http://dev.borzacchiello.it/blog/2014/07/12/posting-to-twitter-with-python</id>
+    <content type="html"><![CDATA[<p>In my spare time I am working on a simple <a href="https://bufferapp.com/">Buffer</a> clone to post my links on various socials without having the limitation of the Free plan nor the Awesome plan.
+I decided to code it in Python, because I want to leave the PHP world and add a new skill to my resume.</p>
+
+<p>I begin working by studying the different methods for posting on socials, and today was <strong>Twitter day</strong>.</p>
+
+<h2>First step: RTFM</h2>
+
+<p>Before searching on Google <em>&ldquo;Post Twitter Python&rdquo;</em> I wanted to read <a href="https://dev.twitter.com/docs/">Twitter documentation</a>. The <a href="https://dev.twitter.com/docs/api">REST API</a> was the one that seemed to fit what I needed,
+so I went on and read the <a href="https://dev.twitter.com/docs/api/1.1/post/statuses/update">POST statuses/update</a> page.</p>
+
+<p>To post a tweet you need to issue a <code>POST</code> request to <code>https://api.twitter.com/1.1/statuses/update.json</code> with a <code>status</code> parameter. The request must be signed
+using OAuth.</p>
+
+<p>Twitter offers <a href="https://dev.twitter.com/docs/auth/obtaining-access-tokens">different methods for authentication</a> in order to get the necessary access tokens to issue requests. As I need this application only for personal use,
+I decided to use the <a href="https://dev.twitter.com/docs/auth/tokens-devtwittercom">dev.twitter.com authentication</a>, that enables you to post from your personal account. Simply create a new Twitter application and generate
+the access tokens<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. There is an example in the documentation so I thought that I was almost done.</p>
+
+<h2>Getting the home timeline (aka Twitter docs are outdated)</h2>
+
+<p>Unfortunately, Twitter documentation for Python dev.twitter.com authentication is outdated, as it uses the <a href="https://github.com/brosner/python-oauth2">Brosner&rsquo;s Python-OAuth2 library</a> that was updated 5 years ago. So I searched for a more recent implementation of the OAuth protocol for Python and I found <a href="https://github.com/litl/rauth">rauth</a>. There is an <a href="https://github.com/litl/rauth/blob/master/examples/twitter-timeline-cli.py">example in the README</a> that show how to make a request to Twitter&rsquo;s API. But this example (shown below) is for the complete <a href="https://dev.twitter.com/docs/auth/3-legged-authorization">three-legged authentication method</a> and I didn&rsquo;t need that.</p>
+
+<p>``` python rauth basic example for 3-legged authentication
+from rauth import OAuth1Service</p>
+
+<p>try:
+read_input = raw_input
+except NameError:
+read_input = input</p>
+
+<h1>Get a real consumer key &amp; secret from <a href="https://dev.twitter.com/apps/new">https://dev.twitter.com/apps/new</a></h1>
+
+<p>twitter = OAuth1Service(</p>
+
+<pre><code>    name='twitter',
+    consumer_key='J8MoJG4bQ9gcmGh8H7XhMg',
+    consumer_secret='7WAscbSy65GmiVOvMU5EBYn5z80fhQkcFWSLMJJu4',
+    request_token_url='https://api.twitter.com/oauth/request_token',
+    access_token_url='https://api.twitter.com/oauth/access_token',
+    authorize_url='https://api.twitter.com/oauth/authorize',
+    base_url='https://api.twitter.com/1.1/')
+</code></pre>
+
+<p>request_token, request_token_secret = twitter.get_request_token()</p>
+
+<p>authorize_url = twitter.get_authorize_url(request_token)</p>
+
+<p>print(&lsquo;Visit this URL in your browser: {url}&rsquo;.format(url=authorize_url))
+pin = read_input(&lsquo;Enter PIN from browser: &rsquo;)</p>
+
+<p>session = twitter.get_auth_session(request_token,</p>
+
+<pre><code>    request_token_secret,
+    method='POST',
+    data={'oauth_verifier': pin})
+</code></pre>
+
+<p>params = {&lsquo;include_rts&rsquo;: 1,  # Include retweets</p>
+
+<pre><code>'count': 10}       # 10 tweets
+</code></pre>
+
+<p>r = session.get(&lsquo;statuses/home_timeline.json&rsquo;, params=params, verify=True)</p>
+
+<p>for i, tweet in enumerate(r.json(), 1):</p>
+
+<pre><code>handle = tweet['user']['screen_name']
+text = tweet['text']
+print(u'{0}. @{1} - {2}'.format(i, handle, text))
+</code></pre>
+
+<p>```</p>
+
+<p>As you can see, to get the access tokens, you&rsquo;ll need to get the pin from the authorization url. But with the dev.twitter.com authentication, I already have those tokens. So I just need to get the session, no need for authorization:</p>
+
+<p>``` python rauth basic example for dev.twitter.com authentication
+from rauth import OAuth1Service</p>
+
+<h1>Get a real consumer key &amp; secret from <a href="https://dev.twitter.com/apps/new">https://dev.twitter.com/apps/new</a></h1>
+
+<p>twitter = OAuth1Service(</p>
+
+<pre><code>    name='twitter',
+    consumer_key='1uUMxRkNp9oTplhnVh1pz96cj',
+    consumer_secret='aBa89p6W96aS1sMAzzWCiH18gz5UxJNkQR4Tbeyb767pmST1dC',
+    request_token_url='https://api.twitter.com/oauth/request_token',
+    access_token_url='https://api.twitter.com/oauth/access_token',
+    authorize_url='https://api.twitter.com/oauth/authorize',
+    base_url='https://api.twitter.com/1.1/')
+</code></pre>
+
+<p>request_token = MY_KEY
+request_token_secret = MY_SECRET</p>
+
+<p>authorize_url = twitter.get_authorize_url(request_token)</p>
+
+<p>session = twitter.get_session((request_token, request_token_secret))</p>
+
+<p>params = {&lsquo;include_rts&rsquo;: 1,  # Include retweets</p>
+
+<pre><code>'count': 10}       # 10 tweets
+</code></pre>
+
+<p>r = session.get(&lsquo;statuses/home_timeline.json&rsquo;, params=params, verify=True)</p>
+
+<p>for i, tweet in enumerate(r.json(), 1):</p>
+
+<pre><code>handle = tweet['user']['screen_name']
+text = tweet['text']
+print(u'{0}. @{1} - {2}'.format(i, handle, text))
+</code></pre>
+
+<p>```</p>
+
+<p>The method that did the trick was <a href="https://rauth.readthedocs.org/en/latest/api/?highlight=get_session#rauth.OAuth1Service.get_session">get_session</a> that takes a tuple containing your access tokens
+and get the current session. With that, I was able to call the Twitter APIs.</p>
+
+<h2>Posting to Twitter</h2>
+
+<p>I was almost done. To post to Twitter I needed to change the <code>get</code> method into a <code>post</code> and change the API endpoint and
+parameters. So here is the final example:</p>
+
+<p>``` python Posting to Twitter with Python
+from rauth import OAuth1Service</p>
+
+<p>if <strong>name</strong> == &lsquo;<strong>main</strong>&rsquo;:</p>
+
+<pre><code>twitter = OAuth1Service(
+        name='twitter',
+        consumer_key=APP_CONSUMER_KEY,
+        consumer_secret=APP_CONSUMER_SECRET,
+        request_token_url='https://api.twitter.com/oauth/request_token',
+        access_token_url='https://api.twitter.com/oauth/access_token',
+        authorize_url='https://api.twitter.com/oauth/authorize',
+        base_url='https://api.twitter.com/1.1/')
+
+request_token = MY_KEY
+request_token_secret = MY_SECRET
+
+session = twitter.get_session((request_token, request_token_secret))
+
+params = {'status': 'Tweet from Python'}
+r = session.post('statuses/update.json', params, verify=True)
+
+print r.json()
+</code></pre>
+
+<p>```</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Ensure that you have given your applicaton the &ldquo;Read/Write&rdquo; permission, before generating the tokens.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>

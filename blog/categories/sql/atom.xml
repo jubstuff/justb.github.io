@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Sql | Little Right's Journal]]></title>
-  <link href="http://JustB.github.io/blog/categories/sql/atom.xml" rel="self"/>
-  <link href="http://JustB.github.io/"/>
-  <updated>2014-07-06T23:50:32+02:00</updated>
-  <id>http://JustB.github.io/</id>
+  <link href="http://dev.borzacchiello.it/blog/categories/sql/atom.xml" rel="self"/>
+  <link href="http://dev.borzacchiello.it/"/>
+  <updated>2014-07-13T16:48:15+02:00</updated>
+  <id>http://dev.borzacchiello.it/</id>
   <author>
     <name><![CDATA[Giustino Borzacchiello]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Multiple Sums With Different Conditions in MySQL]]></title>
-    <link href="http://JustB.github.io/blog/2012/12/17/multiple-sums-with-different-conditions-in-mysql/"/>
+    <link href="http://dev.borzacchiello.it/blog/2012/12/17/multiple-sums-with-different-conditions-in-mysql/"/>
     <updated>2012-12-17T21:52:52+01:00</updated>
-    <id>http://JustB.github.io/blog/2012/12/17/multiple-sums-with-different-conditions-in-mysql</id>
+    <id>http://dev.borzacchiello.it/blog/2012/12/17/multiple-sums-with-different-conditions-in-mysql</id>
     <content type="html"><![CDATA[<p>Today I was working on my last project that involves some statistics on data. I had a table like this:</p>
 
 <p><img class="center" src="/images/tabella-1.png""></p>

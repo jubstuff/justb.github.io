@@ -3,85 +3,104 @@
   
   
   <url>
-    <loc>http://JustB.github.io/blog/2014/02/13/pdftk-tips/</loc>
+    <loc>http://dev.borzacchiello.it/blog/2014/07/12/posting-to-twitter-with-python/</loc>
+    <lastmod>2014-07-12T20:12:50+02:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://dev.borzacchiello.it/blog/2014/02/13/pdftk-tips/</loc>
     <lastmod>2014-02-13T13:20:43+01:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://JustB.github.io/blog/2014/02/12/setting-up-a-vagrant-machine-for-grails-development/</loc>
+    <loc>http://dev.borzacchiello.it/blog/2014/02/12/setting-up-a-vagrant-machine-for-grails-development/</loc>
     <lastmod>2014-02-12T23:21:27+01:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://JustB.github.io/blog/2014/01/17/working-with-strongloops-loopback/</loc>
+    <loc>http://dev.borzacchiello.it/blog/2014/01/17/working-with-strongloops-loopback/</loc>
     <lastmod>2014-01-17T12:24:18+01:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://JustB.github.io/blog/2014/01/14/what-i-learned-today-14-slash-01-slash-2014/</loc>
+    <loc>http://dev.borzacchiello.it/blog/2014/01/14/what-i-learned-today-14-slash-01-slash-2014/</loc>
     <lastmod>2014-01-14T01:59:10+01:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://JustB.github.io/blog/2014/01/13/what-i-learned-today-12-slash-01-slash-2014-edition/</loc>
+    <loc>http://dev.borzacchiello.it/blog/2014/01/13/what-i-learned-today-12-slash-01-slash-2014-edition/</loc>
     <lastmod>2014-01-13T00:36:12+01:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://JustB.github.io/blog/2013/10/13/project-euler-problem-1/</loc>
+    <loc>http://dev.borzacchiello.it/blog/2013/10/13/project-euler-problem-1/</loc>
     <lastmod>2013-10-13T21:03:00+02:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://JustB.github.io/blog/2013/10/13/what-i-learned-13-10-2013/</loc>
+    <loc>http://dev.borzacchiello.it/blog/2013/10/13/what-i-learned-13-10-2013/</loc>
     <lastmod>2013-10-13T12:18:57+02:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://JustB.github.io/blog/2013/10/12/what-i-learned-today-11-slash-10-slash-2013-edition/</loc>
+    <loc>http://dev.borzacchiello.it/blog/2013/10/12/what-i-learned-today-11-slash-10-slash-2013-edition/</loc>
     <lastmod>2013-10-12T17:50:03+02:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://JustB.github.io/blog/2012/12/17/multiple-sums-with-different-conditions-in-mysql/</loc>
+    <loc>http://dev.borzacchiello.it/blog/2012/12/17/multiple-sums-with-different-conditions-in-mysql/</loc>
     <lastmod>2012-12-17T21:52:52+01:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://JustB.github.io/blog/2012/09/15/bob-martin-three-laws-TDD/</loc>
+    <loc>http://dev.borzacchiello.it/blog/2012/09/15/bob-martin-three-laws-TDD/</loc>
     <lastmod>2012-09-15T11:00:21+02:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://JustB.github.io/blog/2012/07/12/on-software-inventory/</loc>
+    <loc>http://dev.borzacchiello.it/blog/2012/07/12/on-software-inventory/</loc>
     <lastmod>2012-07-12T12:18:57+02:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   
   <url>
-    <loc>http://JustB.github.io/blog/archives/</loc>
-    <lastmod>2014-07-06T23:50:32+02:00</lastmod>
+    <loc>http://dev.borzacchiello.it/blog/archives/</loc>
+    <lastmod>2014-07-13T16:48:15+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>http://JustB.github.io/</loc>
-    <lastmod>2014-07-06T23:50:32+02:00</lastmod>
+    <loc>http://dev.borzacchiello.it/</loc>
+    <lastmod>2014-07-13T16:48:15+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
+  <url>
+    <loc>http://dev.borzacchiello.it/about/</loc>
+    <lastmod>2014-07-13T16:48:15+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+  <url>
+    <loc>http://dev.borzacchiello.it/google30ff1f094f1bb5ca.html</loc>
+    <lastmod>2014-07-13T16:47:1405262840Z</lastmod>
+    <priority>0.6</priority>
+  </url>
   
 </urlset>

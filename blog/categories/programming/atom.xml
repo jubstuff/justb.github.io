@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Programming | Little Right's Journal]]></title>
-  <link href="http://JustB.github.io/blog/categories/programming/atom.xml" rel="self"/>
-  <link href="http://JustB.github.io/"/>
-  <updated>2014-07-06T23:50:32+02:00</updated>
-  <id>http://JustB.github.io/</id>
+  <link href="http://dev.borzacchiello.it/blog/categories/programming/atom.xml" rel="self"/>
+  <link href="http://dev.borzacchiello.it/"/>
+  <updated>2014-07-13T16:48:15+02:00</updated>
+  <id>http://dev.borzacchiello.it/</id>
   <author>
     <name><![CDATA[Giustino Borzacchiello]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[On Software Inventory]]></title>
-    <link href="http://JustB.github.io/blog/2012/07/12/on-software-inventory/"/>
+    <link href="http://dev.borzacchiello.it/blog/2012/07/12/on-software-inventory/"/>
     <updated>2012-07-12T12:18:57+02:00</updated>
-    <id>http://JustB.github.io/blog/2012/07/12/on-software-inventory</id>
+    <id>http://dev.borzacchiello.it/blog/2012/07/12/on-software-inventory</id>
     <content type="html"><![CDATA[<p>Few days ago Joel Spolsky published a post on his blog from the title: <a href="http://www.joelonsoftware.com/items/2012/07/09.html">&ldquo;Software Inventory&rdquo;</a>.
 In this post, he associates &ldquo;inventory costs&rdquo; to software, just like a traditional factory. Spolsky highlights these points where inventory piles up:</p>
 

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Euler | Little Right's Journal]]></title>
-  <link href="http://JustB.github.io/blog/categories/euler/atom.xml" rel="self"/>
-  <link href="http://JustB.github.io/"/>
-  <updated>2014-07-06T23:50:32+02:00</updated>
-  <id>http://JustB.github.io/</id>
+  <link href="http://dev.borzacchiello.it/blog/categories/euler/atom.xml" rel="self"/>
+  <link href="http://dev.borzacchiello.it/"/>
+  <updated>2014-07-13T16:48:15+02:00</updated>
+  <id>http://dev.borzacchiello.it/</id>
   <author>
     <name><![CDATA[Giustino Borzacchiello]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Project Euler - Problem 1]]></title>
-    <link href="http://JustB.github.io/blog/2013/10/13/project-euler-problem-1/"/>
+    <link href="http://dev.borzacchiello.it/blog/2013/10/13/project-euler-problem-1/"/>
     <updated>2013-10-13T21:03:00+02:00</updated>
-    <id>http://JustB.github.io/blog/2013/10/13/project-euler-problem-1</id>
+    <id>http://dev.borzacchiello.it/blog/2013/10/13/project-euler-problem-1</id>
     <content type="html"><![CDATA[<p>Today I started to solve the Project Euler problems. I don&rsquo;t know how much time I can spend solving these problems, but I hope to complete the <em>quest</em> in the span of a lifetime :).</p>
 
 <p>So here is the first problem:</p>

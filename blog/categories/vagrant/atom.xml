@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Vagrant, | Little Right's Journal]]></title>
-  <link href="http://JustB.github.io/blog/categories/vagrant/atom.xml" rel="self"/>
-  <link href="http://JustB.github.io/"/>
-  <updated>2014-07-06T23:50:32+02:00</updated>
-  <id>http://JustB.github.io/</id>
+  <link href="http://dev.borzacchiello.it/blog/categories/vagrant/atom.xml" rel="self"/>
+  <link href="http://dev.borzacchiello.it/"/>
+  <updated>2014-07-13T16:48:15+02:00</updated>
+  <id>http://dev.borzacchiello.it/</id>
   <author>
     <name><![CDATA[Giustino Borzacchiello]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Setting Up a Vagrant Machine for Grails Development]]></title>
-    <link href="http://JustB.github.io/blog/2014/02/12/setting-up-a-vagrant-machine-for-grails-development/"/>
+    <link href="http://dev.borzacchiello.it/blog/2014/02/12/setting-up-a-vagrant-machine-for-grails-development/"/>
     <updated>2014-02-12T23:21:27+01:00</updated>
-    <id>http://JustB.github.io/blog/2014/02/12/setting-up-a-vagrant-machine-for-grails-development</id>
+    <id>http://dev.borzacchiello.it/blog/2014/02/12/setting-up-a-vagrant-machine-for-grails-development</id>
     <content type="html"><![CDATA[<p>Recently I&rsquo;ve tried several times to integrate <a href="http://www.vagrantup.com/">Vagrant</a> in my development flow, without success. So, now that I have to start
 Grails development I decided to setup a development enviroment first.</p>
 

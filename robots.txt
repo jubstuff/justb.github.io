@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://JustB.github.io/sitemap.xml 
+Sitemap: http://dev.borzacchiello.it/sitemap.xml 
