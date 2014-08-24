@@ -4,7 +4,7 @@ title: "Setting up a Vagrant machine for Grails development"
 date: 2014-02-12 23:21:27 +0100
 comments: true
 description: "How to setup a Vagrant machine for Grails development"
-categories: vagrant, grails
+categories: vagrant grails
 ---
 
 Recently I've tried several times to integrate [Vagrant](http://www.vagrantup.com/) in my development flow, without success. So, now that I have to start

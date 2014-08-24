@@ -7,4 +7,6 @@ sharing: false
 footer: true
 ---
 
-Hello
+Hello there! My name is Giustino Borzacchiello and I am a web developer based in Italy.
+
+

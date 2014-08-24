@@ -3,7 +3,9 @@ layout: post
 title: "Short tags, long pain"
 date: 2014-08-22 22:50:28 +0200
 comments: true
-categories:
+riassunto: "My battle with PHP short tags in a legacy codebase"
+description: "PHP short tags could be a nest for insidious bugs. Try to not use them."
+categories: wordpress php
 ---
 
 Recently I've joined a colleague of mine into a project that involves a WordPress multisite. First thing first,
