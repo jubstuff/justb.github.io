@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Php | Giustino Borzacchiello]]></title>
+  <link href="http://dev.borzacchiello.it/blog/categories/php/atom.xml" rel="self"/>
+  <link href="http://dev.borzacchiello.it/"/>
+  <updated>2014-08-24T23:43:30+02:00</updated>
+  <id>http://dev.borzacchiello.it/</id>
+  <author>
+    <name><![CDATA[Giustino Borzacchiello]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Short Tags, Long Pain]]></title>
+    <link href="http://dev.borzacchiello.it/blog/2014/08/22/short-tags/"/>
+    <updated>2014-08-22T22:50:28+02:00</updated>
+    <id>http://dev.borzacchiello.it/blog/2014/08/22/short-tags</id>
+    <content type="html"><![CDATA[<p>Recently I&rsquo;ve joined a colleague of mine into a project that involves a WordPress multisite. First thing first,
+I downloaded the code and the database to study the codebase in my development environment, as I usually do.</p>
+
+<p>I created a <code>.dev</code> virtualhost and used wp-cli to search and replace the original domain in the WordPress database.</p>
+
+<p>Then, I opened the browser and navigated to the root site of the multisite. There, I noted something strange: the title
+of the website was wrong. It was taking the title from on of the child site.</p>
+
+<p>I googled for <em>&ldquo;WordPress load wrong site&rdquo;</em> without success, then I thought of testing the site with the Twenty Twelve
+theme to check if there was something wrong with my installation. As I was thinking, with TT the site was working good.</p>
+
+<p>So, there was something in the theme!</p>
+
+<p>In this theme there were many loops over all the child sites, to print and link some informations in the root site.
+After these loops in WordPress, you have to call the <code>restore_current_blog()</code> function, to reset the global environment
+that WordPress needs to run. If you skip one of these calls, the site would act just like it was on my dev environment.</p>
+
+<p>But all the loops had the call to <code>restore_current_blog()</code> at the bottom.</p>
+
+<p>Then, I noted something strange; this:</p>
+
+<p><code>php
+&lt;? restore_current_blog(); ?&gt;
+</code></p>
+
+<p>I don&rsquo;t like short tags. I always try to make my code as portable as possible. I even had arguments in the past with some
+colleagues in this regards. Given this, I always disable short tags on my servers. Even on development ones.</p>
+
+<p>Needless to say, I just needed to replace the short tags with standard <code>&lt;?php</code> to make the site work as it should.
+Oh, I hate short tags!</p>
+]]></content>
+  </entry>
+  
+</feed>
