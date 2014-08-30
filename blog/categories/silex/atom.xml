@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Silex | Giustino Borzacchiello]]></title>
+  <link href="http://dev.borzacchiello.it/blog/categories/silex/atom.xml" rel="self"/>
+  <link href="http://dev.borzacchiello.it/"/>
+  <updated>2014-08-31T00:00:42+02:00</updated>
+  <id>http://dev.borzacchiello.it/</id>
+  <author>
+    <name><![CDATA[Giustino Borzacchiello]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A Simple Silex Application Skeleton]]></title>
+    <link href="http://dev.borzacchiello.it/blog/2014/08/30/a-simple-silex-application-skeleton/"/>
+    <updated>2014-08-30T23:51:49+02:00</updated>
+    <id>http://dev.borzacchiello.it/blog/2014/08/30/a-simple-silex-application-skeleton</id>
+    <content type="html"><![CDATA[<p>I have set up a <a href="https://github.com/JustB/silex-skeleton">skeleton for Silex applications</a> that use Twig as a template library.</p>
+
+<h2>Details</h2>
+
+<p>It all starts with <code>web/index.php</code></p>
+
+<p>```php
+&lt;?php</p>
+
+<p>require <strong>DIR</strong> . &lsquo;/../vendor/autoload.php&rsquo;;</p>
+
+<p>$app = require_once <strong>DIR</strong> . &lsquo;/../src/app.php&rsquo;;
+require_once <strong>DIR</strong> . &lsquo;/../config/prod.php&rsquo;;
+require_once <strong>DIR</strong> . &lsquo;/../src/controllers.php&rsquo;;</p>
+
+<p>$app->run();
+```</p>
+
+<p>First, the app is created in <code>src/app.php</code> and the Twig Service Provider is loaded:</p>
+
+<p>```php
+&lt;?php</p>
+
+<p>use Silex\Application;
+use Silex\Provider\TwigServiceProvider;</p>
+
+<p>$app = new Application();
+$app->register(new TwigServiceProvider());</p>
+
+<p>return $app;
+```</p>
+
+<p>Then, in <code>config/prod.php</code>, we set the Twig path (and other settings):</p>
+
+<p>```php
+&lt;?php</p>
+
+<p>$app[&lsquo;twig.path&rsquo;] = <strong>DIR</strong> . &lsquo;/../templates&rsquo;;
+```</p>
+
+<p>Finally, in <code>src/controllers.php</code> we load the routes:</p>
+
+<p>```php
+&lt;?php</p>
+
+<p>$app->get(&lsquo;/&rsquo;, function() use ($app) {</p>
+
+<pre><code>return $app['twig']-&gt;render('hello.twig', array(
+    'name' =&gt; 'World',
+));
+</code></pre>
+
+<p>});
+```</p>
+
+<h3>Thanks to</h3>
+
+<p>This project is based on <a href="https://github.com/silexphp/Silex-Skeleton">Silex-Skeleton</a></p>
+]]></content>
+  </entry>
+  
+</feed>
