@@ -6,4 +6,4 @@ comments: true
 categories: 
 ---
 
-Sometimes I feel a little 
+I don't like telling people that I'm a WordPress developer
